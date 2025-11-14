@@ -24,6 +24,7 @@ xmlcopyeditor_SOURCES = aboutdialog.cpp \
 	ditadoc.cpp \
 	ditamapmodel.cpp \
 	ditatopicmodel.cpp \
+	ditawysiwygctrl.cpp \
 	dtd2schema.cpp \
 	exportdialog.cpp \
 	findreplacepanel.cpp \
