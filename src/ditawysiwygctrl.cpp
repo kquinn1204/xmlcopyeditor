@@ -194,7 +194,10 @@ void DitaWysiwygCtrl::renderNode(xmlNodePtr node)
 		renderTextContent(node);
 		EndItalic();
 	}
-	else if (strcmp(nodeName, "body") == 0 || strcmp(nodeName, "topic") == 0)
+	else if (strcmp(nodeName, "body") == 0 || strcmp(nodeName, "topic") == 0 ||
+	         strcmp(nodeName, "task") == 0 || strcmp(nodeName, "concept") == 0 ||
+	         strcmp(nodeName, "reference") == 0 || strcmp(nodeName, "taskbody") == 0 ||
+	         strcmp(nodeName, "context") == 0)
 	{
 		// Container elements - render children
 		for (xmlNodePtr child = node->children; child; child = child->next)
@@ -204,6 +207,45 @@ void DitaWysiwygCtrl::renderNode(xmlNodePtr node)
 				renderNode(child);
 			}
 		}
+	}
+	else if (strcmp(nodeName, "steps") == 0)
+	{
+		// Render steps as numbered list
+		Newline();
+		int stepNumber = 1;
+		for (xmlNodePtr child = node->children; child; child = child->next)
+		{
+			if (child->type == XML_ELEMENT_NODE && strcmp((const char*)child->name, "step") == 0)
+			{
+				renderStep(child, stepNumber++);
+			}
+		}
+		Newline();
+	}
+	else if (strcmp(nodeName, "codeblock") == 0)
+	{
+		// Render code block with monospace font
+		wxRichTextAttr codeAttr;
+		codeAttr.SetFontFamily(wxFONTFAMILY_TELETYPE);
+		codeAttr.SetFontSize(9);
+		codeAttr.SetBackgroundColour(wxColour(240, 240, 240));
+		codeAttr.SetLeftIndent(200);
+		codeAttr.SetParagraphSpacingBefore(10);
+		codeAttr.SetParagraphSpacingAfter(10);
+
+		BeginStyle(codeAttr);
+
+		// Get all text content preserving whitespace
+		xmlChar* content = xmlNodeGetContent(node);
+		if (content)
+		{
+			wxString text = wxString::FromUTF8((const char*)content);
+			WriteText(text);
+			xmlFree(content);
+		}
+
+		EndStyle();
+		Newline();
 	}
 	else
 	{
@@ -260,6 +302,97 @@ void DitaWysiwygCtrl::renderTextContent(xmlNodePtr node)
 			}
 		}
 	}
+}
+
+void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
+{
+	if (!node)
+	{
+		return;
+	}
+
+	// Start the numbered list item for this step
+	BeginNumberedBullet(stepNumber, 100, 60);
+
+	// Process children
+	for (xmlNodePtr child = node->children; child; child = child->next)
+	{
+		if (child->type != XML_ELEMENT_NODE)
+		{
+			continue;
+		}
+
+		const char* childName = (const char*)child->name;
+
+		if (strcmp(childName, "cmd") == 0)
+		{
+			// Render the command/instruction
+			renderTextContent(child);
+		}
+		else if (strcmp(childName, "substeps") == 0)
+		{
+			// Render substeps as nested numbered list
+			Newline();
+			int substepNumber = 1;
+			for (xmlNodePtr substep = child->children; substep; substep = substep->next)
+			{
+				if (substep->type == XML_ELEMENT_NODE && strcmp((const char*)substep->name, "substep") == 0)
+				{
+					// Render substep
+					BeginNumberedBullet(substepNumber++, 150, 60);
+
+					// Look for cmd in substep
+					for (xmlNodePtr substepChild = substep->children; substepChild; substepChild = substepChild->next)
+					{
+						if (substepChild->type == XML_ELEMENT_NODE)
+						{
+							const char* substepChildName = (const char*)substepChild->name;
+							if (strcmp(substepChildName, "cmd") == 0)
+							{
+								renderTextContent(substepChild);
+							}
+							else if (strcmp(substepChildName, "stepxmp") == 0)
+							{
+								Newline();
+								// Render step example content
+								for (xmlNodePtr exChild = substepChild->children; exChild; exChild = exChild->next)
+								{
+									if (exChild->type == XML_ELEMENT_NODE)
+									{
+										renderNode(exChild);
+									}
+								}
+							}
+						}
+					}
+
+					EndNumberedBullet();
+					Newline();
+				}
+			}
+		}
+		else if (strcmp(childName, "stepxmp") == 0)
+		{
+			// Render step example
+			Newline();
+			for (xmlNodePtr exChild = child->children; exChild; exChild = exChild->next)
+			{
+				if (exChild->type == XML_ELEMENT_NODE)
+				{
+					renderNode(exChild);
+				}
+			}
+		}
+		else if (strcmp(childName, "info") == 0)
+		{
+			// Render additional info
+			Newline();
+			renderTextContent(child);
+		}
+	}
+
+	EndNumberedBullet();
+	Newline();
 }
 
 void DitaWysiwygCtrl::updateModelFromContent()

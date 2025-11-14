@@ -132,6 +132,14 @@ protected:
 	void renderTextContent(xmlNodePtr node);
 
 	/**
+	 * Render a DITA task step element
+	 *
+	 * @param node libxml2 node pointer to step element
+	 * @param stepNumber Step number for numbering
+	 */
+	void renderStep(xmlNodePtr node, int stepNumber);
+
+	/**
 	 * Build DITA XML from current rich text content
 	 *
 	 * @return DITA Topic XML string
