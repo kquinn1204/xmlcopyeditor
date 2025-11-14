@@ -1,0 +1,10 @@
+.DS_Store
+**.dmg
+**.app
+**.swp
+**.bz2
+xmlcopyeditor
+xmlcopyeditor.exe
+**.o
+tests-main
+thumbs.db

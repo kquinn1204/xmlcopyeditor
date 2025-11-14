@@ -1,0 +1,92 @@
+# Version number followed by the release date
+
+1.3.1.0 2022/10/8
+  * Fix a layout assertion
+  * Keep running when spell checking fails
+  + Support libenchant-2
+  * Fix a DDE error on Windows (Bug #236)
+  * gdk_x11_get_server_time crashes when an invalid window is passed
+  * Migrate to PCRE2 (Miriam Ruiz)
+
+1.3.0.0 2020/08/15
+  * Link against wxWidgets 3.0
+  * SSE2 compatible CPUs are required (xerces-c++)
+
+1.2.1.5
+  * Use the same default encoding to read and write files (Bug #234)
+  * Only show SSE2 warning in debug build
+  * Bug #228 Misleading translation when file was changed externally, may lead to data loss
+  * Bug #227 Dead Link: Help > Forum
+  * Bug #221 Patch for building with C++11 (Roger Leigh)
+  + Added Mac port
+  * Update the iconized frame window when opening files from the command line
+  * Fix supporting for filenames with non-ASCII characters
+
+1.2.1.4
+  + Feature #171 Fold element does not fold following whitespace
+  + Feature #170 I did a small patch that allows SPACE to trigger autocompletion on any space (Thanassis Tsiodras)
+
+1.2.1.3 2014/09/06
+  * Fixed problems with new documents
+  * Bug #212 XSLT insert elements
+  * Bug #211 Tag-completion remains on-top when XML-Copy-Editor looses focus
+  * Keep the original format when associating a DTD/schema/XSL
+  + Added a Linux manual
+  - Stopped installing copyright notices of components that are not installed by us
+  + Feature #169 Close current tab with Ctrl+W
+
+1.2.1.2 2014/06/02
+  + Feature #69 Add "current XPath" shortcut
+  + Feature #155 XPath - functions
+  + Click on the error message to jump to the error location
+  * Bug #103 Locale files have the wrong pathname under Linux
+  * Bug #99 fix desktop file (Marco Rodrigues)
+  * Bug #57 black on black = hard to use
+
+1.2.1.1 2014/05/04
+  + Feature #25 Fast commenting
+  + x64 installation package
+  + Supported HTTPS on validation
+  * Auto complete list for DTDs that are on the internet
+  * Show UI before opening any file
+  * Made UI more responsive
+  * Fixed tab order
+  * Fixed encoding problems
+  * Fixed invisible captions in high contrast mode (Windows only, http://trac.wxwidgets.org/ticket/16186)
+
+1.2.1 2014/04/06
+  - Zooming in/out problem with default font
+  + Close panels with menu or, when built with wxWidgets 3.0, Escape key
+  * Updated Khmer translation
+
+1.2.0.12 2013/12/24
+  + Converting DTD to schema
+  + Khmer translation
+  * Use less temporary files
+  * Fixed bugs
+
+1.2.0.11 2013/11/03
+  * Fixed bugs
+
+1.2.0.10 2013/11/01
+  * Improved support for large files
+  * Improved Unicode handling
+  * Improved catalogue resolving
+  * Fixed bugs
+
+1.2.0.9 2012/12/07
+  * Fixed a crash
+  * Clear error indicators when there is no error
+
+1.2.0.8 2012/09/17
+  * Creating schemas from XML files
+  * Support element substitutions in schemas
+  * Many bug fixes
+
+1.2.0.7
+  + More DAISY features
+
+1.2.0.6 2009/11/15
+  + Catalan translation by Robert Falcó Miramontes
+  + DAISY (http://daisymfc.sourceforge.net/) Pipeline integration
+

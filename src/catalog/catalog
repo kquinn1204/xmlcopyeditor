@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <public publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" uri="../dtd/xhtml1-transitional.dtd"/>
+  <public publicId="-//W3C//DTD XHTML 1.0 Strict//EN" uri="../dtd/xhtml1-strict.dtd"/>
+  <public publicId="-//W3C//DTD XHTML 1.0 Frameset//EN" uri="../dtd/xhtml1-frameset.dtd"/>
+  <public publicId="-//W3C//ENTITIES Latin 1 for XHTML//EN" uri="../dtd/xhtml-lat1.ent"/>
+  <public publicId="-//W3C//ENTITIES Symbols for XHTML//EN" uri="../dtd/xhtml-symbol.ent"/>
+  <public publicId="-//W3C//ENTITIES Special for XHTML//EN" uri="../dtd/xhtml-special.ent"/>
+  <public publicId="-//OASIS//DTD DocBook XML V5.0//EN" uri="../dtd/docbook/5.0/docbook.dtd"/>
+  <public publicId="-//OASIS//DTD DocBook XML V4.4//EN" uri="../dtd/docbook/4.4/docbookx.dtd"/>
+  <public publicId="-//TEI P4//DTD Main Document Type//EN" uri="../dtd/tei/p4/tei2.dtd"/>
+  <public publicId="-//TEI P5//DTD Main Document Type//EN" uri="../dtd/tei/p5/tei_all.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Map//EN" uri="../dtd/dita/map.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Task//EN" uri="../dtd/dita/task.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Topic//EN" uri="../dtd/dita/topic.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Concept//EN" uri="../dtd/dita/concept.dtd"/>
+  <public publicId="-//OpenLaszlo//DTD Main Document Type//EN" uri="../dtd/lzx.dtd"/>
+  <public publicId="urn:newsml:iptc.org:20021018:NewsMLv1.2:1" uri="../dtd/NewsML_1.2.dtd"/>
+  <public publicId="-//TopicMaps.Org//DTD XML Topic Map (XTM) 1.0//EN" uri="../dtd/xtm1.dtd"/>
+  <public publicId="ISO/IEC 13250-3:2005//DTD XML Topic Maps (XTM) 2.0//EN" uri="../dtd/xtm2.dtd"/>
+  <public publicId="-//OpenLearn//DTD" uri="../dtd/OUGenericFull.dtd"/>
+  <public publicId="-//Moodle Glossary//DTD" uri="../dtd/moodle_glossary.dtd"/>
+  <public publicId="-//Moodle XML//DTD" uri="../dtd/moodle_xml.dtd"/>
+  <rewriteSystem systemIdStartString="http://www.w3.org/TR/xhtml1/DTD/" rewritePrefix="../dtd/"/>
+</catalog>

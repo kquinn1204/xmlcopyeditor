@@ -1,0 +1,36 @@
+Source: xmlcopyeditor
+Section: editors
+Priority: optional
+Maintainer: Zane U. Ji <zaneuji@users.sf.net>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, cpio, file, gettext,
+  intltool, libatk-bridge2.0-dev, libatk1.0-dev, libatspi2.0-dev, libblkid-dev,
+  libboost1.74-dev, libbrotli-dev, libc6-i386, libcairo2-dev, libdatrie-dev,
+  libdbus-1-dev, libegl-dev, libenchant-2-dev, libepoxy-dev, libexpat1-dev,
+  libfakeroot, libffi-dev, libfontconfig-dev, libfreetype-dev, libfribidi-dev,
+  libgdk-pixbuf-2.0-dev, libgl-dev, libglib2.0-0, libglib2.0-dev,
+  libgraphite2-dev, libgtk-3-dev, libharfbuzz-dev, libicu70,
+  libjpeg-turbo8-dev, libmagic-mgc, libmagic1, libmount-dev, libpango1.0-dev,
+  libpcre2-dev, libpcre3-dev, libperl5.34, libpixman-1-dev, libpng-dev,
+  libselinux1-dev, libsepol-dev, libthai-dev, libtiff-dev, libunistring2,
+  libwayland-dev, libwxgtk3.0-gtk3-dev, libx11-dev, libxau-dev,
+  libxcb-render0-dev, libxcb-shm0-dev, libxcb1-dev, libxcomposite-dev,
+  libxcursor-dev, libxdamage-dev, libxdmcp-dev, libxerces-c-dev, libxext-dev,
+  libxfixes-dev, libxft-dev, libxi-dev, libxinerama-dev, libxkbcommon-dev,
+  libxml-parser-perl, libxml2, libxml2-dev, libxrandr-dev, libxrender-dev,
+  libxslt1-dev, libxtst-dev, mailcap, mawk, perl-modules, pkg-config,
+  shared-mime-info, uuid-dev, x11proto-dev, zlib1g-dev
+Standards-Version: 3.9.2
+Homepage: http://xml-copy-editor.sourceforge.net/
+Vcs-Git: git://git.code.sf.net/p/xml-copy-editor/code
+Vcs-Browser: http://sourceforge.net/p/xml-copy-editor/code/
+
+Package: xmlcopyeditor
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: fast, free, validating XML editor
+ XML Copy Editor is an XML editor focusing on editing document markup
+ languages like DITA, DocBook, WordprocessingML. Features: DTD/XML
+ Schema/RELAX NG validation, XSLT, XPath, Pretty-printing, Syntax
+ highlighting, Folding, Tag completion, Tag locking, Tag-free editing,
+ Built-in support for XHTML, XSL, DocBook and TEI, Generating XML Schema,
+ Spelling and style check with built-in spell/style checker.

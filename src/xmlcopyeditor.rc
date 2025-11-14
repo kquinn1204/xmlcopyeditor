@@ -1,0 +1,221 @@
+/*
+ * Copyright 2005-2009 Gerald Schmidt.
+ * Copyright 2012-2014 Zane U. Ji.
+ *
+ * This file is part of Xml Copy Editor.
+ *
+ * Xml Copy Editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * Xml Copy Editor is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Xml Copy Editor; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 1 resource.
+//
+
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+
+#define APSTUDIO_READONLY_SYMBOLS
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include <wx/msw/wx.rc>
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#undef APSTUDIO_READONLY_SYMBOLS
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Additional include files
+//
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// English (United States) resources
+//
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// BITMAP : Bitmap
+//
+
+#if USE_PNG
+stock_calc-accept PNG "png/stock_calc-accept.png"
+stock_calc-accept-green PNG "png/stock_calc-accept-green.png"
+stock_copy_16 PNG "png/stock_copy_16.png"
+stock_cut_16 PNG "png/stock_cut_16.png"
+stock_filters PNG "png/stock_filters.png"
+stock_help_16 PNG "png/stock_help_16.png"
+stock_hyperlink PNG "png/stock_hyperlink.png"
+stock_internet PNG "png/stock_internet.png"
+stock_internet_16 PNG "png/stock_internet_16.png"
+stock_new PNG "png/stock_new.png"
+stock_new_16 PNG "png/stock_new_16.png"
+stock_open PNG "png/stock_open.png"
+stock_open_16 PNG "png/stock_open_16.png"
+stock_paste_16 PNG "png/stock_paste_16.png"
+stock_print PNG "png/stock_print.png"
+stock_print_16 PNG "png/stock_print_16.png"
+stock_print_preview_16 PNG "png/stock_print_preview_16.png"
+stock_redo_16 PNG "png/stock_redo_16.png"
+stock_save PNG "png/stock_save.png"
+stock_save_16 PNG "png/stock_save_16.png"
+stock_search_16 PNG "png/stock_search_16.png"
+stock_spellcheck PNG "png/stock_spellcheck.png"
+stock_spellcheck_16 PNG "png/stock_spellcheck_16.png"
+stock_undo_16 PNG "png/stock_undo_16.png"
+#else // USE_PNG
+stock_calc-accept BITMAP "bmp/stock_calc-accept.bmp"
+stock_calc-accept-green BITMAP "bmp/stock_calc-accept-green.bmp"
+stock_copy_16 BITMAP "bmp/stock_copy_16.bmp"
+stock_cut_16 BITMAP "bmp/stock_cut_16.bmp"
+stock_filters BITMAP "bmp/stock_filters.bmp"
+stock_help_16 BITMAP "bmp/stock_help_16.bmp"
+stock_hyperlink BITMAP "bmp/stock_hyperlink.bmp"
+stock_internet BITMAP "bmp/stock_internet.bmp"
+stock_internet_16 BITMAP "bmp/stock_internet_16.bmp"
+stock_new BITMAP "bmp/stock_new.bmp"
+stock_new_16 BITMAP "bmp/stock_new_16.bmp"
+stock_open BITMAP "bmp/stock_open.bmp"
+stock_open_16 BITMAP "bmp/stock_open_16.bmp"
+stock_paste_16 BITMAP "bmp/stock_paste_16.bmp"
+stock_print BITMAP "bmp/stock_print.bmp"
+stock_print_16 BITMAP "bmp/stock_print_16.bmp"
+stock_print_preview_16 BITMAP "bmp/stock_print_preview_16.bmp"
+stock_redo_16 BITMAP "bmp/stock_redo_16.bmp"
+stock_save BITMAP "bmp/stock_save.bmp"
+stock_save_16 BITMAP "bmp/stock_save_16.bmp"
+stock_search_16 BITMAP "bmp/stock_search_16.bmp"
+stock_spellcheck BITMAP "bmp/stock_spellcheck.bmp"
+stock_spellcheck_16 BITMAP "bmp/stock_spellcheck_16.bmp"
+stock_undo_16 BITMAP "bmp/stock_undo_16.bmp"
+#endif // USE_PNG
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// MENUEX : Menu
+//
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// CURSOR : Cursor
+//
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// ICON : Icon
+//
+
+appicon ICON "ico/appicon.ico"
+appicondoc ICON "ico/appicondoc.ico"
+
+#endif    // English (United States) resources
+//////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST : Manifest
+//
+// Already taken care of by wxWidgets
+
+#ifdef APSTUDIO_INVOKED
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+  "\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+  "#define APSTUDIO_HIDDEN_SYMBOLS\r\n",
+  "#include <wx/msw/wx.rc>\r\n",
+  "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+END
+
+3 TEXTINCLUDE
+BEGIN
+  "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,3,1,0
+ PRODUCTVERSION 1,3,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "XML Copy Editor Team"
+            VALUE "FileDescription", "XML Copy Editor is a fast, free, validating XML editor"
+            VALUE "FileVersion", ""
+            VALUE "InternalName", "xmlcopyeditor.exe"
+            VALUE "LegalCopyright", "Copyright (c) 2022 Gerald Schmidt"
+            VALUE "OriginalFilename", "XmlCopyEditor.exe"
+            VALUE "ProductName", "XML Copy Editor"
+            VALUE "ProductVersion", ""
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#ifndef APSTUDIO_INVOKED
+
+#endif    // not APSTUDIO_INVOKED
+//
+//////////////////////////////////////////////////////////////////////////////
+

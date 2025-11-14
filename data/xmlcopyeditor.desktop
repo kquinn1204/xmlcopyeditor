@@ -1,0 +1,24 @@
+[Desktop Entry]
+Name=XML Copy Editor
+Name[ca]=XML Copy Editor
+Name[de]=XML Copy Editor
+Name[es]=XML Copy Editor
+Name[fr]=XML Copy Editor
+Name[it]=XML Copy Editor
+Name[km]=កម្មវិធីកែ​ច្បាប់ចម្លង XML
+Name[nl]=XML Copy Editor
+Name[ru]=XML Copy Editor
+Name[sk]=XML Copy Editor
+Name[sv]=XML Copy Editor
+Name[uk_UA]=XML Copy Editor
+Name[zh_CN]=XML Copy Editor
+Name[zh_TW]=XML Copy Editor
+GenericName=XML Editor
+Comment=Edit XML documents
+Type=Application
+Exec=xmlcopyeditor %U
+Icon=xmlcopyeditor
+Terminal=false
+MimeType=text/xml;
+Categories=Development;Utility;TextEditor;
+Keywords=XML;Editor;
