@@ -641,6 +641,7 @@ void DitaWysiwygCtrl::setupDefaultFormatting()
 	SetBasicStyle(attr);
 
 	// Enable some useful features
-	SetEditable(true);
+	// NOTE: Set to read-only until two-way sync is implemented
+	SetEditable(false);
 	ShowPosition(0);
 }

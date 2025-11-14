@@ -131,10 +131,12 @@ void DitaDoc::switchToCodeView()
 	if (!mWysiwygCtrl || !mTopicModel)
 		return;
 
-	// Sync WYSIWYG to model
-	syncWysiwygToModel();
+	// NOTE: Skipping syncWysiwygToModel() for now because buildXmlFromContent()
+	// creates a simplified topic structure and loses task-specific elements
+	// (steps, substeps, codeblocks, etc.). WYSIWYG view is currently read-only.
+	// TODO: Implement proper two-way sync that preserves all DITA elements
 
-	// Render model to code
+	// Render model to code (original content preserved)
 	renderModelToCode();
 
 	// Hide WYSIWYG, show code view

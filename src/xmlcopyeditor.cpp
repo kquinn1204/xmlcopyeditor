@@ -5609,12 +5609,19 @@ wxToolBar *MyFrame::getToolBar()
 	    _ ( "Lock Tags" ) );
 	toolBar->ToggleTool (
 	    ID_PROTECT_TAGS, protectTags );
+
+	// Add extra spacing before WYSIWYG button for visual separation
+	addSafeSeparator ( toolBar );
+	toolBar->AddSeparator();
+
+	// WYSIWYG toggle button with distinctive icon
+	wxBitmap wysiwygBitmap = wxArtProvider::GetBitmap ( wxART_FIND, wxART_TOOLBAR );
 	toolBar->AddCheckTool (
 	    ID_DITA_VIEW_TOGGLE,
-	    _ ( "WYSIWYG View" ),
-	    filtersBitmap,
+	    _ ( "Preview" ),
+	    wysiwygBitmap,
 	    wxNullBitmap,
-	    _ ( "Toggle WYSIWYG/Code View" ) );
+	    _ ( "Toggle DITA WYSIWYG Preview / Code View" ) );
 #endif
 
 	toolBar->Realize();
