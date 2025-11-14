@@ -110,8 +110,18 @@ bool DitaTopicModel::isValidTopic()
 	if ( !rootNode )
 		return false;
 
-	// Check if root element is "topic"
-	if ( xmlStrcmp ( rootNode->name, BAD_CAST "topic" ) != 0 )
+	// Check if root element is "topic" or a specialized topic type
+	// Specialized topic types include: task, concept, reference, troubleshooting, glossentry, etc.
+	bool isTopicType = (
+		xmlStrcmp ( rootNode->name, BAD_CAST "topic" ) == 0 ||
+		xmlStrcmp ( rootNode->name, BAD_CAST "task" ) == 0 ||
+		xmlStrcmp ( rootNode->name, BAD_CAST "concept" ) == 0 ||
+		xmlStrcmp ( rootNode->name, BAD_CAST "reference" ) == 0 ||
+		xmlStrcmp ( rootNode->name, BAD_CAST "troubleshooting" ) == 0 ||
+		xmlStrcmp ( rootNode->name, BAD_CAST "glossentry" ) == 0
+	);
+
+	if ( !isTopicType )
 		return false;
 
 	// A valid DITA topic must have an id attribute
