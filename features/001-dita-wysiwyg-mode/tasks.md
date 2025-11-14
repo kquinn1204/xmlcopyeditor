@@ -36,11 +36,11 @@ Create the `DitaTopicModel` class header file with all method signatures defined
 - `src/ditatopicmodel.cpp` (skeleton only)
 
 **Acceptance Criteria:**
-- [ ] Header file compiles without errors
-- [ ] All public methods declared with documentation comments
-- [ ] Private member variables defined (xmlDocPtr, xmlNodePtr, maps)
-- [ ] Includes necessary libxml2 headers
-- [ ] Copyright and license headers present
+- [X] Header file compiles without errors
+- [X] All public methods declared with documentation comments
+- [X] Private member variables defined (xmlDocPtr, xmlNodePtr, maps)
+- [X] Includes necessary libxml2 headers
+- [X] Copyright and license headers present
 
 **Implementation Notes:**
 - Follow existing XML Copy Editor code style
@@ -63,11 +63,11 @@ Implement XML loading and parsing into the DitaTopicModel DOM structure.
 - Private helper methods for DOM initialization
 
 **Acceptance Criteria:**
-- [ ] Can parse valid DITA Topic XML string
-- [ ] Returns false for invalid XML
-- [ ] Properly initializes internal DOM structures
-- [ ] No memory leaks (verify with valgrind)
-- [ ] Root element validation (must be `<topic>`)
+- [X] Can parse valid DITA Topic XML string
+- [X] Returns false for invalid XML
+- [X] Properly initializes internal DOM structures
+- [X] No memory leaks (verify with valgrind)
+- [X] Root element validation (must be `<topic>`)
 
 **Test Cases:**
 - Load minimal valid topic: `<topic id="test"><title>Test</title></topic>`
@@ -88,11 +88,11 @@ Implement serialization from internal DOM back to XML string.
 - `std::string serializeToXml()`
 
 **Acceptance Criteria:**
-- [ ] Serialized XML is well-formed
-- [ ] Preserves all elements and attributes
-- [ ] Maintains proper DITA structure
-- [ ] Round-trip test passes (load → serialize → load produces identical DOM)
-- [ ] Proper XML declaration and encoding
+- [X] Serialized XML is well-formed
+- [X] Preserves all elements and attributes
+- [X] Maintains proper DITA structure
+- [X] Round-trip test passes (load → serialize → load produces identical DOM)
+- [X] Proper XML declaration and encoding
 
 **Test Cases:**
 - Load sample DITA file, serialize, compare
@@ -114,10 +114,10 @@ Implement methods to query topic structure and content.
 - Helper methods for element traversal
 
 **Acceptance Criteria:**
-- [ ] Can extract title text from topic
-- [ ] Can set/update title
-- [ ] Handles missing title element gracefully
-- [ ] Handles nested title content (text nodes only for MVP)
+- [X] Can extract title text from topic
+- [X] Can set/update title
+- [X] Handles missing title element gracefully
+- [X] Handles nested title content (text nodes only for MVP)
 
 **Test Cases:**
 - Get title from valid topic
@@ -146,11 +146,11 @@ Create `DitaMapModel` class with basic load, parse, and serialize functionality.
 - Internal TopicRef structure parsing
 
 **Acceptance Criteria:**
-- [ ] Can parse DITAMAP XML
-- [ ] Extracts topicref elements into structures
-- [ ] Preserves href, navtitle, and nesting
-- [ ] Round-trip serialization works
-- [ ] No memory leaks
+- [X] Can parse DITAMAP XML
+- [X] Extracts topicref elements into structures
+- [X] Preserves href, navtitle, and nesting
+- [X] Round-trip serialization works
+- [X] No memory leaks
 
 **Test Cases:**
 - Load flat DITAMAP (no nesting)
@@ -184,11 +184,11 @@ DitaFileType detectDitaTypeFromContent(const std::string& xmlContent);
 3. Check root element name
 
 **Acceptance Criteria:**
-- [ ] Correctly identifies DITA Topic files
-- [ ] Correctly identifies DITAMAP files
-- [ ] Returns NOT_DITA for other XML files
-- [ ] Works with both file path and content string
-- [ ] Handles edge cases (no DOCTYPE, generic .xml extension)
+- [X] Correctly identifies DITA Topic files
+- [X] Correctly identifies DITAMAP files
+- [X] Returns NOT_DITA for other XML files
+- [X] Works with both file path and content string
+- [X] Handles edge cases (no DOCTYPE, generic .xml extension)
 
 **Test Cases:**
 - test_data/simple_topic.dita → DITA_TOPIC
@@ -213,10 +213,10 @@ Update build system to compile new DITA source files.
 - Verify compilation on Fedora Linux
 
 **Acceptance Criteria:**
-- [ ] `./configure && make` completes successfully
-- [ ] All new source files compile without warnings
-- [ ] No linker errors
-- [ ] Application still runs (smoke test)
+- [X] `./configure && make` completes successfully
+- [X] All new source files compile without warnings
+- [X] No linker errors
+- [X] Application still runs (smoke test)
 
 **Verification:**
 ```bash
@@ -250,10 +250,10 @@ Create comprehensive unit tests for DitaTopicModel and DitaMapModel.
 - Error handling
 
 **Acceptance Criteria:**
-- [ ] All tests pass
-- [ ] Code coverage > 70% for model classes
-- [ ] Tests are automated and can run in CI
-- [ ] Test data files are valid DITA
+- [X] All tests pass
+- [X] Code coverage > 70% for model classes
+- [X] Tests are automated and can run in CI
+- [X] Test data files are valid DITA
 
 **Test Framework:** Use existing test infrastructure or add minimal test harness
 
