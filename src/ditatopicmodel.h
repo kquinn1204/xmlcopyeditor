@@ -160,6 +160,12 @@ private:
 	void buildElementIdMap();
 
 	/**
+	 * Recursively build element ID mapping
+	 * @param node current node to process
+	 */
+	void buildElementIdMapRecursive ( xmlNodePtr node );
+
+	/**
 	 * Generate unique ID for an element
 	 * @return unique ID string
 	 */

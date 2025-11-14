@@ -41,8 +41,45 @@ DitaTopicModel::~DitaTopicModel()
 
 bool DitaTopicModel::loadFromXml ( const std::string &xml )
 {
-	// TODO: TASK-002 - Implement XML parsing
-	return false;
+	// Clean up any existing document
+	if ( doc )
+	{
+		xmlFreeDoc ( doc );
+		doc = NULL;
+		rootNode = NULL;
+		elementIdMap.clear();
+		elementIdCounter = 0;
+	}
+
+	// Parse XML string
+	doc = xmlParseMemory ( xml.c_str(), xml.length() );
+	if ( !doc )
+	{
+		return false; // Failed to parse XML
+	}
+
+	// Get root element
+	rootNode = xmlDocGetRootElement ( doc );
+	if ( !rootNode )
+	{
+		xmlFreeDoc ( doc );
+		doc = NULL;
+		return false; // No root element
+	}
+
+	// Validate that this is a DITA topic
+	if ( !isValidTopic() )
+	{
+		xmlFreeDoc ( doc );
+		doc = NULL;
+		rootNode = NULL;
+		return false; // Not a valid DITA topic
+	}
+
+	// Build element ID mapping
+	buildElementIdMap();
+
+	return true;
 }
 
 std::string DitaTopicModel::serializeToXml()
@@ -53,8 +90,26 @@ std::string DitaTopicModel::serializeToXml()
 
 bool DitaTopicModel::isValidTopic()
 {
-	// TODO: TASK-002 - Implement validation
-	return false;
+	if ( !rootNode )
+		return false;
+
+	// Check if root element is "topic"
+	if ( xmlStrcmp ( rootNode->name, BAD_CAST "topic" ) != 0 )
+		return false;
+
+	// A valid DITA topic must have an id attribute
+	xmlChar *id = xmlGetProp ( rootNode, BAD_CAST "id" );
+	if ( !id )
+	{
+		return false; // Topic must have an id
+	}
+	xmlFree ( id );
+
+	// Check for required title element
+	// Note: title is required but we'll be lenient for now
+	// as we may be creating new topics
+
+	return true;
 }
 
 std::string DitaTopicModel::getTitle()
@@ -115,7 +170,33 @@ std::vector<std::string> DitaTopicModel::getValidChildElements ( const std::stri
 
 void DitaTopicModel::buildElementIdMap()
 {
-	// TODO: TASK-002 - Build ID mapping from DOM
+	elementIdMap.clear();
+	elementIdCounter = 0;
+
+	if ( !rootNode )
+		return;
+
+	// Recursively traverse the DOM and assign IDs
+	buildElementIdMapRecursive ( rootNode );
+}
+
+void DitaTopicModel::buildElementIdMapRecursive ( xmlNodePtr node )
+{
+	if ( !node )
+		return;
+
+	// Only process element nodes
+	if ( node->type == XML_ELEMENT_NODE )
+	{
+		std::string id = generateElementId();
+		elementIdMap[id] = node;
+	}
+
+	// Recurse through children
+	for ( xmlNodePtr child = node->children; child; child = child->next )
+	{
+		buildElementIdMapRecursive ( child );
+	}
 }
 
 std::string DitaTopicModel::generateElementId()
