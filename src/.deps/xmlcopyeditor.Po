@@ -425,10 +425,10 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h /usr/include/inttypes.h \
  /usr/include/xercesc/util/XercesVersion.hpp xmlcopyeditorcopy.h \
- readfile.h wraplibxml.h /usr/include/libxml2/libxml/parser.h \
+ readfile.h ditadoc.h ditadetector.h ditatopicmodel.h \
+ /usr/include/libxml2/libxml/tree.h /usr/include/libxml2/libxml/parser.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
- /usr/include/libxml2/libxml/tree.h \
  /usr/include/libxml2/libxml/xmlstring.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/xmlregexp.h \
@@ -440,7 +440,7 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/libxml2/libxml/entities.h \
  /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
  /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/libxml2/libxml/threads.h \
+ /usr/include/libxml2/libxml/threads.h ditamapmodel.h wraplibxml.h \
  /usr/include/libxml2/libxml/xmlschemas.h \
  /usr/include/libxml2/libxml/xpath.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
@@ -1390,11 +1390,13 @@ casehandler.h:
 /usr/include/xercesc/util/XercesVersion.hpp:
 xmlcopyeditorcopy.h:
 readfile.h:
-wraplibxml.h:
+ditadoc.h:
+ditadetector.h:
+ditatopicmodel.h:
+/usr/include/libxml2/libxml/tree.h:
 /usr/include/libxml2/libxml/parser.h:
 /usr/include/libxml2/libxml/xmlversion.h:
 /usr/include/libxml2/libxml/xmlexports.h:
-/usr/include/libxml2/libxml/tree.h:
 /usr/include/libxml2/libxml/xmlstring.h:
 /usr/include/libxml2/libxml/xmlmemory.h:
 /usr/include/libxml2/libxml/xmlregexp.h:
@@ -1410,6 +1412,8 @@ wraplibxml.h:
 /usr/include/libxml2/libxml/xmlIO.h:
 /usr/include/libxml2/libxml/SAX2.h:
 /usr/include/libxml2/libxml/threads.h:
+ditamapmodel.h:
+wraplibxml.h:
 /usr/include/libxml2/libxml/xmlschemas.h:
 /usr/include/libxml2/libxml/xpath.h:
 /usr/include/libxml2/libxml/xpathInternals.h:

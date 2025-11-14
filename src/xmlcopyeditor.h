@@ -91,6 +91,7 @@ enum
 	ID_FEEDBACK,
 	ID_TOOLBAR_VISIBLE,
 	ID_PROTECT_TAGS,
+	ID_DITA_VIEW_TOGGLE,
 	ID_SHOW_TAGS,
 	ID_HIDE_ATTRIBUTES,
 	ID_HIDE_TAGS,
@@ -300,6 +301,7 @@ class MyFrame : public wxFrame
 		void OnUpdateReplaceRange ( wxUpdateUIEvent& event );
 		void OnUpdateReload ( wxUpdateUIEvent& event );
 		void OnUpdateLocationPaneVisible ( wxUpdateUIEvent& event );
+		void OnUpdateDitaViewToggle ( wxUpdateUIEvent& event );
 		void OnValidateDTD ( wxCommandEvent& event );
 		void OnValidateRelaxNG ( wxCommandEvent& event );
 		void OnValidateSchema ( wxCommandEvent& event );
@@ -314,6 +316,7 @@ class MyFrame : public wxFrame
 		void OnToolbarVisible ( wxCommandEvent& event );
 		void OnLocationPaneVisible ( wxCommandEvent& event );
 		void OnProtectTags ( wxCommandEvent& event );
+		void OnDitaViewToggle ( wxCommandEvent& event );
 		void OnVisibilityState ( wxCommandEvent& event );
 		void OnColorScheme ( wxCommandEvent& event );
 		void OnAssociate ( wxCommandEvent& event );
