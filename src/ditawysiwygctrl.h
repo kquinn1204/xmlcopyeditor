@@ -131,6 +131,29 @@ protected:
 	 */
 	void renderTextContent(xmlNodePtr node);
 
+	/**
+	 * Build DITA XML from current rich text content
+	 *
+	 * @return DITA Topic XML string
+	 */
+	std::string buildXmlFromContent();
+
+	/**
+	 * Build list XML from rich text buffer
+	 *
+	 * @param buffer wxRichTextBuffer reference
+	 * @return List XML fragment
+	 */
+	std::string buildListsXml(wxRichTextBuffer& buffer);
+
+	/**
+	 * Escape special XML characters
+	 *
+	 * @param text Text to escape
+	 * @return Escaped XML text
+	 */
+	std::string escapeXml(const std::string& text);
+
 private:
 	DitaTopicModel *mModel;  // Pointer to the DITA Topic model (not owned)
 

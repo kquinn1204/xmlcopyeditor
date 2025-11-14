@@ -24,6 +24,7 @@
 #include <wx/richtext/richtextstyles.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+#include <sstream>
 
 // Event table implementation
 BEGIN_EVENT_TABLE(DitaWysiwygCtrl, wxRichTextCtrl)
@@ -263,15 +264,187 @@ void DitaWysiwygCtrl::renderTextContent(xmlNodePtr node)
 
 void DitaWysiwygCtrl::updateModelFromContent()
 {
-	// Placeholder for TASK-012
-	// This will be implemented later
-
 	if (!mModel)
 	{
 		return;
 	}
 
-	// TODO (TASK-012): Implement sync logic from view to model
+	// Build XML string from rich text content
+	std::string xmlContent = buildXmlFromContent();
+
+	// Load the XML back into the model
+	if (!xmlContent.empty())
+	{
+		mModel->loadFromXml(xmlContent);
+	}
+}
+
+std::string DitaWysiwygCtrl::buildXmlFromContent()
+{
+	// Start building DITA Topic XML
+	std::ostringstream xml;
+
+	xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+	xml << "<!DOCTYPE topic PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"topic.dtd\">\n";
+	xml << "<topic id=\"topic\">\n";
+
+	// Get the rich text buffer
+	wxRichTextBuffer& buffer = GetBuffer();
+
+	// Track if we've seen the title
+	bool foundTitle = false;
+	bool inBody = false;
+
+	// Iterate through paragraphs
+	for (size_t i = 0; i < buffer.GetChildCount(); i++)
+	{
+		wxRichTextParagraph* para = wxDynamicCast(buffer.GetChild(i), wxRichTextParagraph);
+		if (!para)
+		{
+			continue;
+		}
+
+		// Get paragraph text
+		wxString paraText = para->GetTextForRange(para->GetRange());
+		paraText.Trim(true).Trim(false);
+
+		if (paraText.IsEmpty())
+		{
+			continue;
+		}
+
+		// Get paragraph attributes
+		wxRichTextAttr attr = para->GetAttributes();
+
+		// Check if this is the title (first non-empty paragraph with larger font)
+		if (!foundTitle)
+		{
+			// Assume first paragraph is title
+			xml << "  <title>" << escapeXml(paraText.ToStdString()) << "</title>\n";
+			foundTitle = true;
+			continue;
+		}
+
+		// Start body if not already
+		if (!inBody)
+		{
+			xml << "  <body>\n";
+			inBody = true;
+		}
+
+		// Check if this is a list item
+		if (attr.HasBulletStyle())
+		{
+			// This is a list item - handle in buildListXml
+			continue; // Will be processed separately
+		}
+
+		// Regular paragraph
+		xml << "    <p>" << escapeXml(paraText.ToStdString()) << "</p>\n";
+	}
+
+	// Process lists
+	std::string listXml = buildListsXml(buffer);
+	if (!listXml.empty())
+	{
+		if (!inBody)
+		{
+			xml << "  <body>\n";
+			inBody = true;
+		}
+		xml << listXml;
+	}
+
+	// Close body if opened
+	if (inBody)
+	{
+		xml << "  </body>\n";
+	}
+
+	xml << "</topic>\n";
+
+	return xml.str();
+}
+
+std::string DitaWysiwygCtrl::buildListsXml(wxRichTextBuffer& buffer)
+{
+	std::ostringstream xml;
+	bool inList = false;
+
+	for (size_t i = 0; i < buffer.GetChildCount(); i++)
+	{
+		wxRichTextParagraph* para = wxDynamicCast(buffer.GetChild(i), wxRichTextParagraph);
+		if (!para)
+		{
+			continue;
+		}
+
+		wxRichTextAttr attr = para->GetAttributes();
+
+		if (attr.HasBulletStyle())
+		{
+			wxString paraText = para->GetTextForRange(para->GetRange());
+			paraText.Trim(true).Trim(false);
+
+			if (!inList)
+			{
+				// Determine list type
+				if (attr.GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ARABIC)
+				{
+					xml << "    <ol>\n";
+				}
+				else
+				{
+					xml << "    <ul>\n";
+				}
+				inList = true;
+			}
+
+			xml << "      <li>" << escapeXml(paraText.ToStdString()) << "</li>\n";
+		}
+		else if (inList)
+		{
+			// End of list
+			if (attr.GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ARABIC)
+			{
+				xml << "    </ol>\n";
+			}
+			else
+			{
+				xml << "    </ul>\n";
+			}
+			inList = false;
+		}
+	}
+
+	// Close any open list
+	if (inList)
+	{
+		xml << "    </ul>\n";
+	}
+
+	return xml.str();
+}
+
+std::string DitaWysiwygCtrl::escapeXml(const std::string& text)
+{
+	std::string escaped;
+	escaped.reserve(text.length());
+
+	for (char c : text)
+	{
+		switch (c)
+		{
+			case '&':  escaped += "&amp;"; break;
+			case '<':  escaped += "&lt;"; break;
+			case '>':  escaped += "&gt;"; break;
+			case '"':  escaped += "&quot;"; break;
+			case '\'': escaped += "&apos;"; break;
+			default:   escaped += c; break;
+		}
+	}
+
+	return escaped;
 }
 
 DitaTopicModel* DitaWysiwygCtrl::getModel()
