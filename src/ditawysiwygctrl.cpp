@@ -311,10 +311,7 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 		return;
 	}
 
-	// Start the numbered list item for this step
-	BeginNumberedBullet(stepNumber, 100, 60);
-
-	// Process children
+	// Process children to render step content
 	for (xmlNodePtr child = node->children; child; child = child->next)
 	{
 		if (child->type != XML_ELEMENT_NODE)
@@ -326,55 +323,57 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 
 		if (strcmp(childName, "cmd") == 0)
 		{
-			// Render the command/instruction
+			// Render the command/instruction as a numbered item
+			BeginNumberedBullet(stepNumber, 100, 60);
 			renderTextContent(child);
+			EndNumberedBullet();
+			Newline();
 		}
 		else if (strcmp(childName, "substeps") == 0)
 		{
 			// Render substeps as nested numbered list
-			Newline();
 			int substepNumber = 1;
 			for (xmlNodePtr substep = child->children; substep; substep = substep->next)
 			{
 				if (substep->type == XML_ELEMENT_NODE && strcmp((const char*)substep->name, "substep") == 0)
 				{
-					// Render substep
-					BeginNumberedBullet(substepNumber++, 150, 60);
-
-					// Look for cmd in substep
+					// Process substep children
 					for (xmlNodePtr substepChild = substep->children; substepChild; substepChild = substepChild->next)
 					{
-						if (substepChild->type == XML_ELEMENT_NODE)
+						if (substepChild->type != XML_ELEMENT_NODE)
 						{
-							const char* substepChildName = (const char*)substepChild->name;
-							if (strcmp(substepChildName, "cmd") == 0)
+							continue;
+						}
+
+						const char* substepChildName = (const char*)substepChild->name;
+
+						if (strcmp(substepChildName, "cmd") == 0)
+						{
+							// Render substep command as nested numbered item
+							BeginNumberedBullet(substepNumber, 150, 60);
+							renderTextContent(substepChild);
+							EndNumberedBullet();
+							Newline();
+						}
+						else if (strcmp(substepChildName, "stepxmp") == 0)
+						{
+							// Render step example content OUTSIDE bullet context
+							for (xmlNodePtr exChild = substepChild->children; exChild; exChild = exChild->next)
 							{
-								renderTextContent(substepChild);
-							}
-							else if (strcmp(substepChildName, "stepxmp") == 0)
-							{
-								Newline();
-								// Render step example content
-								for (xmlNodePtr exChild = substepChild->children; exChild; exChild = exChild->next)
+								if (exChild->type == XML_ELEMENT_NODE)
 								{
-									if (exChild->type == XML_ELEMENT_NODE)
-									{
-										renderNode(exChild);
-									}
+									renderNode(exChild);
 								}
 							}
 						}
 					}
-
-					EndNumberedBullet();
-					Newline();
+					substepNumber++;
 				}
 			}
 		}
 		else if (strcmp(childName, "stepxmp") == 0)
 		{
-			// Render step example
-			Newline();
+			// Render step example OUTSIDE bullet context
 			for (xmlNodePtr exChild = child->children; exChild; exChild = exChild->next)
 			{
 				if (exChild->type == XML_ELEMENT_NODE)
@@ -386,13 +385,10 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 		else if (strcmp(childName, "info") == 0)
 		{
 			// Render additional info
-			Newline();
 			renderTextContent(child);
+			Newline();
 		}
 	}
-
-	EndNumberedBullet();
-	Newline();
 }
 
 void DitaWysiwygCtrl::updateModelFromContent()
