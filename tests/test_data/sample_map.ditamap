@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="sample_map">
+  <title>Sample DITA Map</title>
+  <topicref href="intro.dita" navtitle="Introduction"/>
+  <topicref href="concepts.dita" navtitle="Concepts">
+    <topicref href="concept1.dita" navtitle="First Concept"/>
+    <topicref href="concept2.dita" navtitle="Second Concept"/>
+  </topicref>
+  <topicref href="tasks.dita" navtitle="Tasks">
+    <topicref href="task1.dita" navtitle="Task One"/>
+    <topicref href="task2.dita" navtitle="Task Two"/>
+    <topicref href="task3.dita" navtitle="Task Three"/>
+  </topicref>
+  <topicref href="reference.dita" navtitle="Reference"/>
+</map>

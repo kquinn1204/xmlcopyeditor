@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="complex_topic">
+  <title>Complex Test Topic</title>
+  <body>
+    <p>This is the first paragraph with some content.</p>
+    <p>This is the second paragraph.</p>
+    <ul>
+      <li>First list item</li>
+      <li>Second list item</li>
+      <li>Third list item</li>
+    </ul>
+    <p>Paragraph after list.</p>
+    <ol>
+      <li>Numbered item one</li>
+      <li>Numbered item two</li>
+    </ol>
+  </body>
+</topic>
