@@ -229,7 +229,6 @@ void DitaWysiwygCtrl::renderNode(xmlNodePtr node)
 		codeAttr.SetFontFamily(wxFONTFAMILY_TELETYPE);
 		codeAttr.SetFontSize(9);
 		codeAttr.SetBackgroundColour(wxColour(240, 240, 240));
-		codeAttr.SetLeftIndent(200);
 		codeAttr.SetParagraphSpacingBefore(10);
 		codeAttr.SetParagraphSpacingAfter(10);
 
@@ -240,6 +239,9 @@ void DitaWysiwygCtrl::renderNode(xmlNodePtr node)
 		if (content)
 		{
 			wxString text = wxString::FromUTF8((const char*)content);
+			// Add indentation by prepending spaces to each line
+			text.Replace("\n", "\n        ");  // 8 spaces for code indent (slightly more than substeps)
+			WriteText("        ");  // Initial indent
 			WriteText(text);
 			xmlFree(content);
 		}
@@ -324,15 +326,27 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 		if (strcmp(childName, "cmd") == 0)
 		{
 			// Render the command/instruction as a numbered item
-			BeginNumberedBullet(stepNumber, 100, 60);
+			wxRichTextAttr stepAttr;
+			stepAttr.SetLeftIndent(0);  // No indent for main step
+			stepAttr.SetFontSize(10);
+			stepAttr.SetParagraphSpacingAfter(10);
+
+			BeginStyle(stepAttr);
+
+			// Write the step number
+			wxString numberText = wxString::Format("%d. ", stepNumber);
+			WriteText(numberText);
+
+			// Write the step text
 			renderTextContent(child);
-			EndNumberedBullet();
+
+			EndStyle();
 			Newline();
 		}
 		else if (strcmp(childName, "substeps") == 0)
 		{
-			// Render substeps as nested numbered list
-			int substepNumber = 1;
+			// Render substeps with letter bullets (a, b, c...)
+			int substepNumber = 0;
 			for (xmlNodePtr substep = child->children; substep; substep = substep->next)
 			{
 				if (substep->type == XML_ELEMENT_NODE && strcmp((const char*)substep->name, "substep") == 0)
@@ -349,15 +363,27 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 
 						if (strcmp(substepChildName, "cmd") == 0)
 						{
-							// Render substep command as nested numbered item
-							BeginNumberedBullet(substepNumber, 150, 60);
+							// Render substep command with letter bullet (a, b, c...)
+							wxRichTextAttr substepAttr;
+							substepAttr.SetFontSize(10);
+							substepAttr.SetParagraphSpacingAfter(5);
+
+							BeginStyle(substepAttr);
+
+							// Add spaces for indentation, then write the letter bullet
+							WriteText("     ");  // 5 spaces for indentation
+							wxString bulletChar = wxString::Format("%c. ", 'a' + substepNumber);
+							WriteText(bulletChar);
+
+							// Write the substep text
 							renderTextContent(substepChild);
-							EndNumberedBullet();
+
+							EndStyle();
 							Newline();
 						}
 						else if (strcmp(substepChildName, "stepxmp") == 0)
 						{
-							// Render step example content OUTSIDE bullet context
+							// Render step example content - just render, let codeblock handle indent
 							for (xmlNodePtr exChild = substepChild->children; exChild; exChild = exChild->next)
 							{
 								if (exChild->type == XML_ELEMENT_NODE)
@@ -373,7 +399,7 @@ void DitaWysiwygCtrl::renderStep(xmlNodePtr node, int stepNumber)
 		}
 		else if (strcmp(childName, "stepxmp") == 0)
 		{
-			// Render step example OUTSIDE bullet context
+			// Render step example - let child elements handle their own indentation
 			for (xmlNodePtr exChild = child->children; exChild; exChild = exChild->next)
 			{
 				if (exChild->type == XML_ELEMENT_NODE)
