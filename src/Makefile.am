@@ -20,6 +20,9 @@ xmlcopyeditor_SOURCES = aboutdialog.cpp \
 	catalogresolver.cpp \
 	commandpanel.cpp \
 	contexthandler.cpp \
+	ditadetector.cpp \
+	ditamapmodel.cpp \
+	ditatopicmodel.cpp \
 	dtd2schema.cpp \
 	exportdialog.cpp \
 	findreplacepanel.cpp \
