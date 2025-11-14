@@ -22,6 +22,8 @@
 #include "ditawysiwygctrl.h"
 #include <wx/richtext/richtextctrl.h>
 #include <wx/richtext/richtextstyles.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
 
 // Event table implementation
 BEGIN_EVENT_TABLE(DitaWysiwygCtrl, wxRichTextCtrl)
@@ -51,9 +53,6 @@ DitaWysiwygCtrl::~DitaWysiwygCtrl()
 
 void DitaWysiwygCtrl::renderFromModel()
 {
-	// Placeholder for TASK-011
-	// This will be implemented in the next task
-
 	if (!mModel)
 	{
 		return;
@@ -62,19 +61,204 @@ void DitaWysiwygCtrl::renderFromModel()
 	// Clear existing content
 	Clear();
 
-	// TODO (TASK-011): Implement rendering logic
-	// For now, just display a placeholder message
-	wxRichTextAttr attr;
-	attr.SetFontSize(12);
-	attr.SetTextColour(*wxBLACK);
+	// Get XML from model
+	std::string xmlContent = mModel->serializeToXml();
+	if (xmlContent.empty())
+	{
+		return;
+	}
 
+	// Parse XML with libxml2
+	xmlDocPtr doc = xmlParseMemory(xmlContent.c_str(), xmlContent.length());
+	if (!doc)
+	{
+		return;
+	}
+
+	// Get root element
+	xmlNodePtr root = xmlDocGetRootElement(doc);
+	if (!root)
+	{
+		xmlFreeDoc(doc);
+		return;
+	}
+
+	// Start rendering
 	BeginSuppressUndo();
-	BeginParagraphSpacing(0, 20);
 
-	WriteText(wxT("WYSIWYG View - Rendering from model will be implemented in TASK-011"));
+	// Render the topic content
+	renderNode(root);
 
-	EndParagraphSpacing();
 	EndSuppressUndo();
+
+	// Clean up
+	xmlFreeDoc(doc);
+
+	// Move cursor to start
+	SetInsertionPoint(0);
+}
+
+void DitaWysiwygCtrl::renderNode(xmlNodePtr node)
+{
+	if (!node)
+	{
+		return;
+	}
+
+	// Get node name
+	const char* nodeName = (const char*)node->name;
+
+	// Handle different DITA elements
+	if (strcmp(nodeName, "title") == 0)
+	{
+		// Render title - large, bold
+		wxRichTextAttr titleAttr;
+		titleAttr.SetFontSize(16);
+		titleAttr.SetFontWeight(wxFONTWEIGHT_BOLD);
+		titleAttr.SetParagraphSpacingAfter(20);
+
+		BeginStyle(titleAttr);
+		renderTextContent(node);
+		EndStyle();
+		Newline();
+	}
+	else if (strcmp(nodeName, "p") == 0)
+	{
+		// Render paragraph - normal text
+		wxRichTextAttr paraAttr;
+		paraAttr.SetFontSize(10);
+		paraAttr.SetParagraphSpacingAfter(10);
+
+		BeginStyle(paraAttr);
+		renderTextContent(node);
+		EndStyle();
+		Newline();
+	}
+	else if (strcmp(nodeName, "ul") == 0)
+	{
+		// Render unordered list
+		BeginListStyle(wxT("BulletList"));
+
+		// Render each list item
+		for (xmlNodePtr child = node->children; child; child = child->next)
+		{
+			if (child->type == XML_ELEMENT_NODE && strcmp((const char*)child->name, "li") == 0)
+			{
+				renderNode(child);
+			}
+		}
+
+		EndListStyle();
+		Newline();
+	}
+	else if (strcmp(nodeName, "ol") == 0)
+	{
+		// Render ordered list
+		BeginNumberedBullet(1, 100, 60);
+
+		// Render each list item
+		int itemNumber = 1;
+		for (xmlNodePtr child = node->children; child; child = child->next)
+		{
+			if (child->type == XML_ELEMENT_NODE && strcmp((const char*)child->name, "li") == 0)
+			{
+				BeginNumberedBullet(itemNumber++, 100, 60);
+				renderTextContent(child);
+				EndNumberedBullet();
+				Newline();
+			}
+		}
+
+		EndNumberedBullet();
+	}
+	else if (strcmp(nodeName, "li") == 0)
+	{
+		// Render list item (for unordered lists)
+		BeginStandardBullet(wxT("standard/circle"), 100, 60);
+		renderTextContent(node);
+		EndStandardBullet();
+		Newline();
+	}
+	else if (strcmp(nodeName, "b") == 0 || strcmp(nodeName, "bold") == 0)
+	{
+		// Render bold inline
+		BeginBold();
+		renderTextContent(node);
+		EndBold();
+	}
+	else if (strcmp(nodeName, "i") == 0 || strcmp(nodeName, "italic") == 0)
+	{
+		// Render italic inline
+		BeginItalic();
+		renderTextContent(node);
+		EndItalic();
+	}
+	else if (strcmp(nodeName, "body") == 0 || strcmp(nodeName, "topic") == 0)
+	{
+		// Container elements - render children
+		for (xmlNodePtr child = node->children; child; child = child->next)
+		{
+			if (child->type == XML_ELEMENT_NODE)
+			{
+				renderNode(child);
+			}
+		}
+	}
+	else
+	{
+		// Unknown element - render children anyway
+		for (xmlNodePtr child = node->children; child; child = child->next)
+		{
+			if (child->type == XML_ELEMENT_NODE)
+			{
+				renderNode(child);
+			}
+		}
+	}
+}
+
+void DitaWysiwygCtrl::renderTextContent(xmlNodePtr node)
+{
+	if (!node)
+	{
+		return;
+	}
+
+	// Render direct text content
+	for (xmlNodePtr child = node->children; child; child = child->next)
+	{
+		if (child->type == XML_TEXT_NODE)
+		{
+			xmlChar* content = child->content;
+			if (content)
+			{
+				wxString text = wxString::FromUTF8((const char*)content);
+				WriteText(text);
+			}
+		}
+		else if (child->type == XML_ELEMENT_NODE)
+		{
+			// Handle inline elements
+			const char* childName = (const char*)child->name;
+			if (strcmp(childName, "b") == 0 || strcmp(childName, "bold") == 0)
+			{
+				BeginBold();
+				renderTextContent(child);
+				EndBold();
+			}
+			else if (strcmp(childName, "i") == 0 || strcmp(childName, "italic") == 0)
+			{
+				BeginItalic();
+				renderTextContent(child);
+				EndItalic();
+			}
+			else
+			{
+				// Other inline elements - just render text
+				renderTextContent(child);
+			}
+		}
+	}
 }
 
 void DitaWysiwygCtrl::updateModelFromContent()

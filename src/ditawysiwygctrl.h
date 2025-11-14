@@ -26,6 +26,10 @@
 #include <wx/richtext/richtextctrl.h>
 #include "ditatopicmodel.h"
 
+// Forward declaration for libxml2
+struct _xmlNode;
+typedef struct _xmlNode *xmlNodePtr;
+
 /**
  * DitaWysiwygCtrl - WYSIWYG editing control for DITA Topics
  *
@@ -112,6 +116,20 @@ protected:
 	 * Set up basic fonts and paragraph attributes
 	 */
 	void setupDefaultFormatting();
+
+	/**
+	 * Render a single XML node and its children
+	 *
+	 * @param node libxml2 node pointer
+	 */
+	void renderNode(xmlNodePtr node);
+
+	/**
+	 * Render text content from a node
+	 *
+	 * @param node libxml2 node pointer
+	 */
+	void renderTextContent(xmlNodePtr node);
 
 private:
 	DitaTopicModel *mModel;  // Pointer to the DITA Topic model (not owned)
