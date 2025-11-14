@@ -2923,27 +2923,52 @@ void MyFrame::newDocument ( const std::string& s, const wxString& path, bool can
 	{
 		wxWindowUpdateLocker noupdate (this);
 
-		doc = ( s.empty() ) ?
-			  new XmlDoc (
-				  mainBook,
-				  properties,
-				  &protectTags,
-				  visibilityState,
-				  FILE_TYPE_XML,
-				  wxID_ANY,
-				  NULL, 0 // new: NULL pointer leads to default document
-			  )
-			  : new XmlDoc (
-				  mainBook,
-				  properties,
-				  &protectTags,
-				  visibilityState,
-				  FILE_TYPE_XML,
-				  wxID_ANY,
-				  s.c_str(), // modified
-				  s.size(), // new
-				  path,
-				  auxPath );
+		// Detect if this is a DITA file
+		DitaFileType ditaType = DITA_TYPE_NONE;
+		if (!s.empty())
+		{
+			ditaType = ::detectDitaTypeFromContent(s);
+		}
+		bool isDita = (ditaType == DITA_TYPE_TOPIC || ditaType == DITA_TYPE_MAP);
+
+		if (isDita)
+		{
+			doc = new DitaDoc (
+				mainBook,
+				properties,
+				&protectTags,
+				visibilityState,
+				FILE_TYPE_XML,
+				wxID_ANY,
+				s.c_str(),
+				s.size(),
+				path,
+				auxPath );
+		}
+		else
+		{
+			doc = ( s.empty() ) ?
+				  new XmlDoc (
+					  mainBook,
+					  properties,
+					  &protectTags,
+					  visibilityState,
+					  FILE_TYPE_XML,
+					  wxID_ANY,
+					  NULL, 0 // new: NULL pointer leads to default document
+				  )
+				  : new XmlDoc (
+					  mainBook,
+					  properties,
+					  &protectTags,
+					  visibilityState,
+					  FILE_TYPE_XML,
+					  wxID_ANY,
+					  s.c_str(), // modified
+					  s.size(), // new
+					  path,
+					  auxPath );
+		}
 		mainBook->AddPage ( ( wxWindow * ) doc, documentLabel );
 	}
 
@@ -3237,17 +3262,39 @@ bool MyFrame::openFile ( const wxString &file, bool largeFile )
 	{
 		wxWindowUpdateLocker noupdate ( this );
 
-		doc = new XmlDoc (
-			mainBook,
-			( largeFile ) ? largeFileProperties: properties,
-			&protectTags,
-			visibilityState,
-			( !binaryfile.getDataLen() ) ? FILE_TYPE_XML : type,
-			wxID_ANY,
-			finalBuffer,
-			finalBufferLen,
-			fileName,
-			auxPath );
+		// Detect if this is a DITA file
+		std::string contentStr(finalBuffer, finalBufferLen);
+		DitaFileType ditaType = ::detectDitaTypeFromContent(contentStr);
+		bool isDita = (ditaType == DITA_TYPE_TOPIC || ditaType == DITA_TYPE_MAP);
+
+		if (isDita)
+		{
+			doc = new DitaDoc (
+				mainBook,
+				( largeFile ) ? largeFileProperties: properties,
+				&protectTags,
+				visibilityState,
+				( !binaryfile.getDataLen() ) ? FILE_TYPE_XML : type,
+				wxID_ANY,
+				finalBuffer,
+				finalBufferLen,
+				fileName,
+				auxPath );
+		}
+		else
+		{
+			doc = new XmlDoc (
+				mainBook,
+				( largeFile ) ? largeFileProperties: properties,
+				&protectTags,
+				visibilityState,
+				( !binaryfile.getDataLen() ) ? FILE_TYPE_XML : type,
+				wxID_ANY,
+				finalBuffer,
+				finalBufferLen,
+				fileName,
+				auxPath );
+		}
 #ifdef __WXMSW__
 		doc->SetUndoCollection ( false );
 		doc->SetUndoCollection ( true );
