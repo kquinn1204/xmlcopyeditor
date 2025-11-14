@@ -394,7 +394,12 @@ ditadoc.o: ditadoc.cpp /usr/include/stdc-predef.h ditadoc.h \
  /usr/include/libxml2/libxml/entities.h \
  /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
  /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/libxml2/libxml/threads.h ditamapmodel.h
+ /usr/include/libxml2/libxml/threads.h ditamapmodel.h ditawysiwygctrl.h \
+ /usr/include/wx-3.2/wx/richtext/richtextctrl.h \
+ /usr/include/wx-3.2/wx/richtext/richtextbuffer.h \
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/txtstrm.h \
+ /usr/include/wx-3.2/wx/position.h /usr/include/wx-3.2/wx/caret.h \
+ /usr/include/wx-3.2/wx/generic/caret.h /usr/include/wx-3.2/wx/overlay.h
 /usr/include/stdc-predef.h:
 ditadoc.h:
 /usr/include/wx-3.2/wx/wx.h:
@@ -1018,3 +1023,12 @@ ditatopicmodel.h:
 /usr/include/libxml2/libxml/SAX2.h:
 /usr/include/libxml2/libxml/threads.h:
 ditamapmodel.h:
+ditawysiwygctrl.h:
+/usr/include/wx-3.2/wx/richtext/richtextctrl.h:
+/usr/include/wx-3.2/wx/richtext/richtextbuffer.h:
+/usr/include/wx-3.2/wx/cmdproc.h:
+/usr/include/wx-3.2/wx/txtstrm.h:
+/usr/include/wx-3.2/wx/position.h:
+/usr/include/wx-3.2/wx/caret.h:
+/usr/include/wx-3.2/wx/generic/caret.h:
+/usr/include/wx-3.2/wx/overlay.h:

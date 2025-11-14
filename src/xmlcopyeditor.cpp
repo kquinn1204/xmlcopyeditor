@@ -4415,10 +4415,7 @@ void MyFrame::OnDitaViewToggle ( wxCommandEvent& event )
 		toolBar->ToggleTool( ID_DITA_VIEW_TOGGLE, isWysiwyg );
 	}
 
-	// Actual view switching will be implemented in TASK-014
-	// For now, just toggle the button state
-
-	doc->SetFocus();
+	// Focus is set by the view switching logic
 }
 
 void MyFrame::OnUpdateDitaViewToggle ( wxUpdateUIEvent& event )

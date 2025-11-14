@@ -52,7 +52,8 @@ DitaDoc::DitaDoc(
 		style
 	),
 	mDitaType(DITA_TYPE_NONE),
-	mViewMode(DITA_VIEW_CODE)
+	mViewMode(DITA_VIEW_CODE),
+	mWysiwygCtrl(NULL)
 {
 	// Auto-detect DITA type from content if buffer provided
 	if (buffer && bufferLen > 0)
@@ -63,6 +64,12 @@ DitaDoc::DitaDoc(
 
 DitaDoc::~DitaDoc()
 {
+	// Delete WYSIWYG control if created
+	if (mWysiwygCtrl)
+	{
+		mWysiwygCtrl->Destroy();
+		mWysiwygCtrl = NULL;
+	}
 	// boost::scoped_ptr will automatically clean up models
 }
 
@@ -91,9 +98,89 @@ DitaMapModel* DitaDoc::getMapModel()
 	return mMapModel.get();
 }
 
+DitaWysiwygCtrl* DitaDoc::getWysiwygCtrl()
+{
+	return mWysiwygCtrl;
+}
+
 void DitaDoc::setViewMode(DitaViewMode mode)
 {
+	// If mode is same, do nothing
+	if (mode == mViewMode)
+		return;
+
+	// Only support WYSIWYG for topics
+	if (mode == DITA_VIEW_WYSIWYG && mDitaType != DITA_TYPE_TOPIC)
+		return;
+
+	// Perform the switch
+	if (mode == DITA_VIEW_WYSIWYG)
+	{
+		switchToWysiwygView();
+	}
+	else if (mode == DITA_VIEW_CODE)
+	{
+		switchToCodeView();
+	}
+
 	mViewMode = mode;
+}
+
+void DitaDoc::switchToCodeView()
+{
+	if (!mWysiwygCtrl || !mTopicModel)
+		return;
+
+	// Sync WYSIWYG to model
+	syncWysiwygToModel();
+
+	// Render model to code
+	renderModelToCode();
+
+	// Hide WYSIWYG, show code view
+	mWysiwygCtrl->Hide();
+	this->Show();
+	this->SetFocus();
+}
+
+void DitaDoc::switchToWysiwygView()
+{
+	if (!mTopicModel)
+		return;
+
+	// Create WYSIWYG control if not yet created
+	if (!mWysiwygCtrl)
+	{
+		// Get parent window (should be the notebook)
+		wxWindow *parent = GetParent();
+		if (!parent)
+			return;
+
+		// Create WYSIWYG control with same parent
+		mWysiwygCtrl = new DitaWysiwygCtrl(
+			parent,
+			mTopicModel.get(),
+			wxID_ANY,
+			wxEmptyString,
+			GetPosition(),
+			GetSize()
+		);
+
+		// Position it to overlap this control
+		mWysiwygCtrl->SetPosition(GetPosition());
+		mWysiwygCtrl->SetSize(GetSize());
+	}
+
+	// Sync code to model
+	syncCodeToModel();
+
+	// Render model to WYSIWYG
+	renderModelToWysiwyg();
+
+	// Hide code view, show WYSIWYG
+	this->Hide();
+	mWysiwygCtrl->Show();
+	mWysiwygCtrl->SetFocus();
 }
 
 bool DitaDoc::initializeDitaModels()
@@ -143,4 +230,48 @@ DitaFileType DitaDoc::detectDitaTypeFromContent()
 
 	// Use ditadetector utility to detect type (global function)
 	return ::detectDitaTypeFromContent(content);
+}
+
+void DitaDoc::syncCodeToModel()
+{
+	if (!mTopicModel)
+		return;
+
+	// Get XML content from code view
+	wxString wxContent = GetText();
+	std::string content(wxContent.mb_str(wxConvUTF8));
+
+	// Load into model
+	mTopicModel->loadFromXml(content);
+}
+
+void DitaDoc::syncWysiwygToModel()
+{
+	if (!mWysiwygCtrl || !mTopicModel)
+		return;
+
+	// Sync WYSIWYG changes to model
+	mWysiwygCtrl->updateModelFromContent();
+}
+
+void DitaDoc::renderModelToCode()
+{
+	if (!mTopicModel)
+		return;
+
+	// Serialize model to XML
+	std::string xml = mTopicModel->serializeToXml();
+
+	// Set text in code view
+	wxString wxXml = wxString::FromUTF8(xml.c_str());
+	SetText(wxXml);
+}
+
+void DitaDoc::renderModelToWysiwyg()
+{
+	if (!mWysiwygCtrl || !mTopicModel)
+		return;
+
+	// Render model in WYSIWYG view
+	mWysiwygCtrl->renderFromModel();
 }

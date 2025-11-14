@@ -440,8 +440,13 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/libxml2/libxml/entities.h \
  /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
  /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/libxml2/libxml/threads.h ditamapmodel.h wraplibxml.h \
- /usr/include/libxml2/libxml/xmlschemas.h \
+ /usr/include/libxml2/libxml/threads.h ditamapmodel.h ditawysiwygctrl.h \
+ /usr/include/wx-3.2/wx/richtext/richtextctrl.h \
+ /usr/include/wx-3.2/wx/richtext/richtextbuffer.h \
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/txtstrm.h \
+ /usr/include/wx-3.2/wx/position.h /usr/include/wx-3.2/wx/caret.h \
+ /usr/include/wx-3.2/wx/generic/caret.h /usr/include/wx-3.2/wx/overlay.h \
+ wraplibxml.h /usr/include/libxml2/libxml/xmlschemas.h \
  /usr/include/libxml2/libxml/xpath.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
  /usr/include/libxml2/libxml/catalog.h \
@@ -689,11 +694,10 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/wx-3.2/wx/generic/filepickerg.h \
  /usr/include/wx-3.2/wx/richtext/richtextsymboldlg.h \
  /usr/include/wx-3.2/wx/richtext/richtextuicustomization.h \
- /usr/include/wx-3.2/wx/vscroll.h /usr/include/wx-3.2/wx/position.h \
- /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/stdpaths.h \
- /usr/include/wx-3.2/wx/unix/stdpaths.h /usr/include/wx-3.2/wx/tokenzr.h \
- /usr/include/wx-3.2/wx/dir.h xmlschemagenerator.h \
- /usr/include/xercesc/dom/DOMElement.hpp \
+ /usr/include/wx-3.2/wx/vscroll.h /usr/include/wx-3.2/wx/artprov.h \
+ /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
+ /usr/include/wx-3.2/wx/tokenzr.h /usr/include/wx-3.2/wx/dir.h \
+ xmlschemagenerator.h /usr/include/xercesc/dom/DOMElement.hpp \
  /usr/include/xercesc/dom/DOMNode.hpp threadreaper.h \
  /usr/include/wx-3.2/wx/wupdlock.h dtd2schema.h \
  /usr/include/xercesc/validators/DTD/DTDGrammar.hpp \
@@ -1413,6 +1417,15 @@ ditatopicmodel.h:
 /usr/include/libxml2/libxml/SAX2.h:
 /usr/include/libxml2/libxml/threads.h:
 ditamapmodel.h:
+ditawysiwygctrl.h:
+/usr/include/wx-3.2/wx/richtext/richtextctrl.h:
+/usr/include/wx-3.2/wx/richtext/richtextbuffer.h:
+/usr/include/wx-3.2/wx/cmdproc.h:
+/usr/include/wx-3.2/wx/txtstrm.h:
+/usr/include/wx-3.2/wx/position.h:
+/usr/include/wx-3.2/wx/caret.h:
+/usr/include/wx-3.2/wx/generic/caret.h:
+/usr/include/wx-3.2/wx/overlay.h:
 wraplibxml.h:
 /usr/include/libxml2/libxml/xmlschemas.h:
 /usr/include/libxml2/libxml/xpath.h:
@@ -1706,7 +1719,6 @@ exportdialog.h:
 /usr/include/wx-3.2/wx/richtext/richtextsymboldlg.h:
 /usr/include/wx-3.2/wx/richtext/richtextuicustomization.h:
 /usr/include/wx-3.2/wx/vscroll.h:
-/usr/include/wx-3.2/wx/position.h:
 /usr/include/wx-3.2/wx/artprov.h:
 /usr/include/wx-3.2/wx/stdpaths.h:
 /usr/include/wx-3.2/wx/unix/stdpaths.h:

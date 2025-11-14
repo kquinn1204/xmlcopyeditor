@@ -28,6 +28,7 @@
 #include "ditadetector.h"
 #include "ditatopicmodel.h"
 #include "ditamapmodel.h"
+#include "ditawysiwygctrl.h"
 
 /**
  * View modes for DITA documents
@@ -46,9 +47,11 @@ enum DitaViewMode
  * - Automatic DITA file type detection
  * - DITA-specific model management (Topic or Map)
  * - View mode switching (Code, WYSIWYG, Map)
+ * - WYSIWYG editing control
  *
  * Design pattern: Composition over modification
- * - Does not modify XmlDoc base class
+ * - Extends XmlDoc for code view (backwards compatible)
+ * - Contains DitaWysiwygCtrl for WYSIWYG view
  * - Uses models as member variables
  * - Follows existing document lifecycle patterns
  */
@@ -129,11 +132,33 @@ public:
 	DitaMapModel* getMapModel();
 
 	/**
-	 * Set the view mode (called by view switching logic)
+	 * Get the WYSIWYG control (for layout management)
+	 *
+	 * @return Pointer to DitaWysiwygCtrl or NULL if not created
+	 */
+	DitaWysiwygCtrl* getWysiwygCtrl();
+
+	/**
+	 * Set the view mode and perform view switching
+	 *
+	 * This method:
+	 * 1. Syncs current view to model
+	 * 2. Switches visibility of controls
+	 * 3. Renders model in new view
 	 *
 	 * @param mode New view mode to set
 	 */
 	void setViewMode(DitaViewMode mode);
+
+	/**
+	 * Switch to code view
+	 */
+	void switchToCodeView();
+
+	/**
+	 * Switch to WYSIWYG view
+	 */
+	void switchToWysiwygView();
 
 	/**
 	 * Initialize DITA models from current document content
@@ -151,11 +176,32 @@ protected:
 	 */
 	DitaFileType detectDitaTypeFromContent();
 
+	/**
+	 * Sync code view content to model
+	 */
+	void syncCodeToModel();
+
+	/**
+	 * Sync WYSIWYG view content to model
+	 */
+	void syncWysiwygToModel();
+
+	/**
+	 * Render model to code view
+	 */
+	void renderModelToCode();
+
+	/**
+	 * Render model to WYSIWYG view
+	 */
+	void renderModelToWysiwyg();
+
 private:
 	DitaFileType mDitaType;                        // Detected DITA file type
 	DitaViewMode mViewMode;                        // Current view mode
 	boost::scoped_ptr<DitaTopicModel> mTopicModel; // Topic model (if applicable)
 	boost::scoped_ptr<DitaMapModel> mMapModel;     // Map model (if applicable)
+	DitaWysiwygCtrl *mWysiwygCtrl;                 // WYSIWYG control (created on demand)
 };
 
 #endif // DITA_DOC_H
