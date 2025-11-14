@@ -84,8 +84,25 @@ bool DitaTopicModel::loadFromXml ( const std::string &xml )
 
 std::string DitaTopicModel::serializeToXml()
 {
-	// TODO: TASK-003 - Implement XML serialization
-	return "";
+	if ( !doc )
+		return "";
+
+	// Serialize document to buffer
+	xmlChar *xmlBuff;
+	int bufferSize;
+
+	xmlDocDumpFormatMemory ( doc, &xmlBuff, &bufferSize, 1 );
+
+	if ( !xmlBuff )
+		return "";
+
+	// Convert to std::string
+	std::string result ( reinterpret_cast<char*> ( xmlBuff ), bufferSize );
+
+	// Free libxml2 buffer
+	xmlFree ( xmlBuff );
+
+	return result;
 }
 
 bool DitaTopicModel::isValidTopic()
