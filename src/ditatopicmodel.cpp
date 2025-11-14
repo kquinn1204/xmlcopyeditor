@@ -131,13 +131,42 @@ bool DitaTopicModel::isValidTopic()
 
 std::string DitaTopicModel::getTitle()
 {
-	// TODO: TASK-004 - Implement title extraction
-	return "";
+	xmlNodePtr titleNode = getTitleNode();
+	if ( !titleNode )
+		return "";
+
+	// Get text content of title element
+	xmlChar *content = xmlNodeGetContent ( titleNode );
+	if ( !content )
+		return "";
+
+	std::string result ( reinterpret_cast<char*> ( content ) );
+	xmlFree ( content );
+
+	return result;
 }
 
 void DitaTopicModel::setTitle ( const std::string &title )
 {
-	// TODO: TASK-004 - Implement title setting
+	xmlNodePtr titleNode = getTitleNode();
+
+	if ( !titleNode && rootNode )
+	{
+		// Create title element if it doesn't exist
+		titleNode = xmlNewChild ( rootNode, NULL, BAD_CAST "title", BAD_CAST title.c_str() );
+
+		// Update element ID map
+		if ( titleNode )
+		{
+			std::string id = generateElementId();
+			elementIdMap[id] = titleNode;
+		}
+	}
+	else if ( titleNode )
+	{
+		// Update existing title
+		xmlNodeSetContent ( titleNode, BAD_CAST title.c_str() );
+	}
 }
 
 bool DitaTopicModel::insertParagraph ( int position, const std::string &text )
@@ -225,8 +254,20 @@ std::string DitaTopicModel::generateElementId()
 
 xmlNodePtr DitaTopicModel::getTitleNode()
 {
-	// TODO: TASK-004 - Find or create title node
-	return NULL;
+	if ( !rootNode )
+		return NULL;
+
+	// Search for title element as direct child of topic
+	for ( xmlNodePtr child = rootNode->children; child; child = child->next )
+	{
+		if ( child->type == XML_ELEMENT_NODE &&
+		     xmlStrcmp ( child->name, BAD_CAST "title" ) == 0 )
+		{
+			return child;
+		}
+	}
+
+	return NULL; // Title not found
 }
 
 bool DitaTopicModel::validateInsertion ( xmlNodePtr parent, const std::string &elementType )
