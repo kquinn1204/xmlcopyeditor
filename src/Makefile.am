@@ -21,6 +21,7 @@ xmlcopyeditor_SOURCES = aboutdialog.cpp \
 	commandpanel.cpp \
 	contexthandler.cpp \
 	ditadetector.cpp \
+	ditadoc.cpp \
 	ditamapmodel.cpp \
 	ditatopicmodel.cpp \
 	dtd2schema.cpp \
