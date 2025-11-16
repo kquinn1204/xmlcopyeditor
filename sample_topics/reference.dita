@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="reference">
+  <title>Reference</title>
+  <refbody>
+    <section>
+      <title>Reference Materials</title>
+      <p>This section contains detailed reference information:</p>
+      <ul>
+        <li>API Reference - Complete API documentation</li>
+        <li>Glossary - Definitions of key terms</li>
+      </ul>
+    </section>
+  </refbody>
+</reference>

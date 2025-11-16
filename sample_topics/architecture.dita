@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="architecture">
+  <title>System Architecture</title>
+  <body>
+    <p>The system follows a three-tier architecture pattern.</p>
+    <section>
+      <title>Presentation Layer</title>
+      <p>Handles user interface and user interactions.</p>
+    </section>
+    <section>
+      <title>Business Logic Layer</title>
+      <p>Contains the core application logic and business rules.</p>
+    </section>
+    <section>
+      <title>Data Layer</title>
+      <p>Manages data persistence and retrieval.</p>
+    </section>
+  </body>
+</topic>

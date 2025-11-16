@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="api_reference">
+  <title>API Reference</title>
+  <refbody>
+    <section>
+      <title>Overview</title>
+      <p>Complete reference for the application programming interface.</p>
+    </section>
+    <section>
+      <title>Core Classes</title>
+      <ul>
+        <li><b>Document</b> - Main document class</li>
+        <li><b>Editor</b> - Content editing interface</li>
+        <li><b>Publisher</b> - Output generation</li>
+      </ul>
+    </section>
+    <section>
+      <title>Methods</title>
+      <p>Common methods:</p>
+      <ul>
+        <li><codeph>create()</codeph> - Create new instance</li>
+        <li><codeph>save()</codeph> - Save to file</li>
+        <li><codeph>load()</codeph> - Load from file</li>
+        <li><codeph>validate()</codeph> - Check validity</li>
+      </ul>
+    </section>
+  </refbody>
+</reference>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="tasks">
+  <title>Common Tasks</title>
+  <body>
+    <p>This section covers the most common tasks you'll perform.</p>
+    <p>Learn how to:</p>
+    <ul>
+      <li>Create new documents</li>
+      <li>Edit existing documents</li>
+      <li>Publish documents</li>
+    </ul>
+    <p>Each task includes step-by-step instructions.</p>
+  </body>
+</topic>

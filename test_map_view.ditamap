@@ -4,31 +4,31 @@
   <title>Test Map for Drag-and-Drop Functionality</title>
 
   <!-- Top level topics -->
-  <topicref href="getting_started.dita" navtitle="Getting Started">
-    <topicref href="installation.dita" navtitle="Installation Guide"/>
-    <topicref href="quick_start.dita" navtitle="Quick Start Tutorial"/>
+  <topicref href="sample_topics/getting_started.dita" navtitle="Getting Started">
+    <topicref href="sample_topics/installation.dita" navtitle="Installation Guide"/>
+    <topicref href="sample_topics/quick_start.dita" navtitle="Quick Start Tutorial"/>
   </topicref>
 
-  <topicref href="concepts.dita" navtitle="Core Concepts">
-    <topicref href="architecture.dita" navtitle="System Architecture"/>
-    <topicref href="data_model.dita" navtitle="Data Model">
-      <topicref href="entities.dita" navtitle="Entities"/>
-      <topicref href="relationships.dita" navtitle="Relationships"/>
+  <topicref href="sample_topics/concepts.dita" navtitle="Core Concepts">
+    <topicref href="sample_topics/architecture.dita" navtitle="System Architecture"/>
+    <topicref href="sample_topics/data_model.dita" navtitle="Data Model">
+      <topicref href="sample_topics/entities.dita" navtitle="Entities"/>
+      <topicref href="sample_topics/relationships.dita" navtitle="Relationships"/>
     </topicref>
-    <topicref href="workflows.dita" navtitle="Workflows"/>
+    <topicref href="sample_topics/workflows.dita" navtitle="Workflows"/>
   </topicref>
 
-  <topicref href="tasks.dita" navtitle="Common Tasks">
-    <topicref href="create_document.dita" navtitle="Creating Documents"/>
-    <topicref href="edit_document.dita" navtitle="Editing Documents"/>
-    <topicref href="publish_document.dita" navtitle="Publishing Documents"/>
+  <topicref href="sample_topics/tasks.dita" navtitle="Common Tasks">
+    <topicref href="sample_topics/create_document.dita" navtitle="Creating Documents"/>
+    <topicref href="sample_topics/edit_document.dita" navtitle="Editing Documents"/>
+    <topicref href="sample_topics/publish_document.dita" navtitle="Publishing Documents"/>
   </topicref>
 
-  <topicref href="reference.dita" navtitle="Reference">
-    <topicref href="api_reference.dita" navtitle="API Reference"/>
-    <topicref href="glossary.dita" navtitle="Glossary"/>
+  <topicref href="sample_topics/reference.dita" navtitle="Reference">
+    <topicref href="sample_topics/api_reference.dita" navtitle="API Reference"/>
+    <topicref href="sample_topics/glossary.dita" navtitle="Glossary"/>
   </topicref>
 
-  <topicref href="troubleshooting.dita" navtitle="Troubleshooting"/>
-  <topicref href="faq.dita" navtitle="FAQ"/>
+  <topicref href="sample_topics/troubleshooting.dita" navtitle="Troubleshooting"/>
+  <topicref href="sample_topics/faq.dita" navtitle="FAQ"/>
 </map>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE troubleshooting PUBLIC "-//OASIS//DTD DITA Troubleshooting//EN" "troubleshooting.dtd">
+<troubleshooting id="troubleshooting">
+  <title>Troubleshooting</title>
+  <troublebody>
+    <condition>
+      <p>Common issues and their solutions.</p>
+    </condition>
+    <troubleSolution>
+      <cause>
+        <title>Document Won't Save</title>
+        <p>The document may be locked or permissions issue.</p>
+      </cause>
+      <remedy>
+        <steps>
+          <step><cmd>Check file permissions</cmd></step>
+          <step><cmd>Close other applications using the file</cmd></step>
+          <step><cmd>Try Save As with a different name</cmd></step>
+        </steps>
+      </remedy>
+    </troubleSolution>
+    <troubleSolution>
+      <cause>
+        <title>Application Crashes on Startup</title>
+        <p>May be caused by corrupted preferences.</p>
+      </cause>
+      <remedy>
+        <steps>
+          <step><cmd>Reset preferences to defaults</cmd></step>
+          <step><cmd>Reinstall the application</cmd></step>
+          <step><cmd>Check system requirements</cmd></step>
+        </steps>
+      </remedy>
+    </troubleSolution>
+  </troublebody>
+</troubleshooting>

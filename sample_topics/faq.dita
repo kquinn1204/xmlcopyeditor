@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="faq">
+  <title>Frequently Asked Questions</title>
+  <body>
+    <p>Common questions and answers about using the application.</p>
+
+    <section>
+      <title>General Questions</title>
+
+      <p><b>Q: What file formats are supported?</b></p>
+      <p>A: The application supports DITA XML, HTML, Markdown, and plain text.</p>
+
+      <p><b>Q: Is there a mobile version?</b></p>
+      <p>A: Currently, the application is available for desktop platforms only.</p>
+
+      <p><b>Q: Can I work offline?</b></p>
+      <p>A: Yes, all features work offline except cloud synchronization.</p>
+    </section>
+
+    <section>
+      <title>Technical Questions</title>
+
+      <p><b>Q: How do I back up my documents?</b></p>
+      <p>A: Use File → Export to create backups in various formats.</p>
+
+      <p><b>Q: Can I customize keyboard shortcuts?</b></p>
+      <p>A: Yes, go to Tools → Preferences → Keyboard to customize shortcuts.</p>
+
+      <p><b>Q: How do I report bugs?</b></p>
+      <p>A: Use Help → Report Issue to submit bug reports.</p>
+    </section>
+  </body>
+</topic>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="quick_start">
+  <title>Quick Start Tutorial</title>
+  <body>
+    <p>Get up and running in minutes with this quick start guide.</p>
+    <section>
+      <title>First Steps</title>
+      <ol>
+        <li>Launch the application</li>
+        <li>Create a new project</li>
+        <li>Configure basic settings</li>
+        <li>Start working</li>
+      </ol>
+    </section>
+    <section>
+      <title>Next Steps</title>
+      <p>Once you've completed the basics, explore these features:</p>
+      <ul>
+        <li>Advanced configuration options</li>
+        <li>Keyboard shortcuts</li>
+        <li>Integration with other tools</li>
+      </ul>
+    </section>
+  </body>
+</topic>

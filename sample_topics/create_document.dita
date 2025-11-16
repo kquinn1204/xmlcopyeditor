@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="create_document">
+  <title>Creating Documents</title>
+  <taskbody>
+    <context>
+      <p>Create a new document from scratch or from a template.</p>
+    </context>
+    <steps>
+      <step>
+        <cmd>Click File → New Document</cmd>
+      </step>
+      <step>
+        <cmd>Choose a document template or start blank</cmd>
+      </step>
+      <step>
+        <cmd>Enter a title for your document</cmd>
+      </step>
+      <step>
+        <cmd>Select the document type (topic, task, concept)</cmd>
+      </step>
+      <step>
+        <cmd>Click Create to generate the document</cmd>
+      </step>
+    </steps>
+    <result>
+      <p>A new document is created and opened in the editor.</p>
+    </result>
+  </taskbody>
+</task>

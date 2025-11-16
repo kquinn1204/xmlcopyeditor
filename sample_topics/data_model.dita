@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="data_model">
+  <title>Data Model</title>
+  <body>
+    <p>The data model defines how information is structured and related.</p>
+    <p>Key components of the data model include:</p>
+    <ul>
+      <li>Entities - Core data objects</li>
+      <li>Relationships - How entities connect</li>
+      <li>Attributes - Properties of entities</li>
+    </ul>
+    <p>Understanding the data model helps you work more efficiently with the system.</p>
+  </body>
+</topic>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="edit_document">
+  <title>Editing Documents</title>
+  <taskbody>
+    <context>
+      <p>Make changes to existing documents using the editor.</p>
+    </context>
+    <steps>
+      <step>
+        <cmd>Open the document you want to edit</cmd>
+      </step>
+      <step>
+        <cmd>Click in the content area to begin editing</cmd>
+      </step>
+      <step>
+        <cmd>Use the toolbar for formatting options</cmd>
+        <info>
+          <ul>
+            <li>Bold, italic, underline</li>
+            <li>Lists (ordered and unordered)</li>
+            <li>Links and cross-references</li>
+          </ul>
+        </info>
+      </step>
+      <step>
+        <cmd>Save your changes frequently (Ctrl+S)</cmd>
+      </step>
+    </steps>
+    <result>
+      <p>Your edits are saved to the document.</p>
+    </result>
+  </taskbody>
+</task>

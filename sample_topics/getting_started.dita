@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="getting_started">
+  <title>Getting Started</title>
+  <body>
+    <p>Welcome to the Getting Started guide! This section will help you begin using the application.</p>
+    <p>Follow these subsections to install and configure the software:</p>
+    <ul>
+      <li>Installation Guide</li>
+      <li>Quick Start Tutorial</li>
+    </ul>
+  </body>
+</topic>

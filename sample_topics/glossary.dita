@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary Entry//EN" "glossentry.dtd">
+<glossentry id="glossary">
+  <glossterm>Glossary</glossterm>
+  <glossdef>
+    <p>Definitions of key terms used throughout the documentation.</p>
+  </glossdef>
+  <glossBody>
+    <glossSurfaceForm>Terms and Definitions</glossSurfaceForm>
+    <glossUsage>
+      <p>Key terms:</p>
+      <ul>
+        <li><b>DITA</b> - Darwin Information Typing Architecture</li>
+        <li><b>Topic</b> - Self-contained unit of information</li>
+        <li><b>Map</b> - Collection of topics organized hierarchically</li>
+        <li><b>Element</b> - XML markup component</li>
+        <li><b>Attribute</b> - Property of an element</li>
+      </ul>
+    </glossUsage>
+  </glossBody>
+</glossentry>

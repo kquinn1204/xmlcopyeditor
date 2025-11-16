@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="publish_document">
+  <title>Publishing Documents</title>
+  <taskbody>
+    <context>
+      <p>Publish your documents to various output formats.</p>
+    </context>
+    <steps>
+      <step>
+        <cmd>Review your document for errors</cmd>
+      </step>
+      <step>
+        <cmd>Click File → Publish or Export</cmd>
+      </step>
+      <step>
+        <cmd>Select output format</cmd>
+        <choices>
+          <choice>PDF</choice>
+          <choice>HTML</choice>
+          <choice>EPUB</choice>
+          <choice>Microsoft Word</choice>
+        </choices>
+      </step>
+      <step>
+        <cmd>Configure publish settings</cmd>
+      </step>
+      <step>
+        <cmd>Click Publish to generate output</cmd>
+      </step>
+    </steps>
+    <result>
+      <p>Your document is published in the selected format.</p>
+    </result>
+  </taskbody>
+</task>

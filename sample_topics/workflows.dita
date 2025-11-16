@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="workflows">
+  <title>Workflows</title>
+  <body>
+    <p>Workflows define the sequence of steps for completing tasks.</p>
+    <section>
+      <title>Standard Workflow</title>
+      <ol>
+        <li>Create or open a document</li>
+        <li>Edit content</li>
+        <li>Review changes</li>
+        <li>Save or publish</li>
+      </ol>
+    </section>
+    <section>
+      <title>Collaborative Workflow</title>
+      <p>When working with teams:</p>
+      <ol>
+        <li>Assign tasks to team members</li>
+        <li>Track progress</li>
+        <li>Review and approve changes</li>
+        <li>Merge contributions</li>
+        <li>Publish final version</li>
+      </ol>
+    </section>
+  </body>
+</topic>

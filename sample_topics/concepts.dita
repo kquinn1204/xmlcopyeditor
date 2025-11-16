@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="concepts">
+  <title>Core Concepts</title>
+  <body>
+    <p>Understanding the core concepts is essential for effective use of the system.</p>
+    <p>This section covers fundamental topics including:</p>
+    <ul>
+      <li>System Architecture</li>
+      <li>Data Model</li>
+      <li>Workflows</li>
+    </ul>
+    <p>Each concept builds upon the previous one to provide a comprehensive understanding.</p>
+  </body>
+</topic>

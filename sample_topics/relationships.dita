@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="relationships">
+  <title>Relationships</title>
+  <body>
+    <p>Relationships define how entities are connected to each other.</p>
+    <section>
+      <title>Relationship Types</title>
+      <ul>
+        <li><b>One-to-One</b> - Single entity relates to single entity</li>
+        <li><b>One-to-Many</b> - Single entity relates to multiple entities</li>
+        <li><b>Many-to-Many</b> - Multiple entities relate to multiple entities</li>
+      </ul>
+    </section>
+    <section>
+      <title>Examples</title>
+      <p>Common relationship examples in the system:</p>
+      <ul>
+        <li>User owns multiple Documents (one-to-many)</li>
+        <li>Document belongs to Project (many-to-one)</li>
+        <li>Users collaborate on Projects (many-to-many)</li>
+      </ul>
+    </section>
+  </body>
+</topic>
