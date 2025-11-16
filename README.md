@@ -18,7 +18,12 @@ This fork includes significant enhancements for DITA (Darwin Information Typing 
   - Code blocks with proper formatting and indentation
   - Context, info, and other DITA specialized elements
 - **DITA Type Auto-Detection** - Automatically detects DITA topic types (task, concept, reference, troubleshooting, glossentry)
-- **DITA Map Support** - Load and navigate DITA map structures
+- **DITA Map Tree View** - Interactive tree-based navigation and editing of DITA maps with:
+  - Visual hierarchy display of topicref elements
+  - Drag-and-drop reorganization of map structure
+  - Double-click to open referenced topics
+  - Automatic cycle prevention to maintain valid map structure
+  - Seamless switching between tree view and code view
 
 ## Features
 
@@ -146,13 +151,19 @@ xmlcopyeditor document.xml
 1. **Open a DITA file** (topic or map)
    - The editor automatically detects DITA document type
 
-2. **Toggle WYSIWYG Preview**
+2. **Toggle WYSIWYG Preview** (for DITA topics)
    - Click the "Preview" button in the toolbar (magnifying glass icon)
    - Or use the View menu
+   - Available for all DITA topic types (task, concept, reference, etc.)
 
-3. **Navigate DITA Maps**
-   - Open .ditamap files to see map structure
-   - Use the navigation features to jump between topics
+3. **Work with DITA Maps** (for .ditamap files)
+   - **Open a DITA map** - The editor loads the map structure
+   - **Toggle Map Tree View** - Click the "Map View" button in the toolbar (list icon)
+   - **Navigate the hierarchy** - Expand/collapse topics to see the map structure
+   - **Open referenced topics** - Double-click any topic in the tree to open it in a new tab
+   - **Reorganize map structure** - Drag topics and drop them on other topics to reorganize
+   - **Switch views** - Toggle between Tree View and Code View to see/edit XML directly
+   - **Invalid moves prevented** - The editor blocks operations that would create circular references
 
 ### Keyboard Shortcuts
 
@@ -174,10 +185,13 @@ xmlcopyeditor-1.3.1.0/
 │   ├── ditadoc.cpp         # DITA document handling
 │   ├── ditatopicmodel.cpp  # DITA topic model
 │   ├── ditamapmodel.cpp    # DITA map model
+│   ├── ditamaptreectrl.cpp # DITA map tree view control
 │   ├── ditawysiwygctrl.cpp # WYSIWYG rendering control
+│   ├── ditadetector.cpp    # DITA type detection
 │   └── ...
 ├── catalog/                # XML catalogs
 ├── templates/              # Document templates
+├── tests/                  # Test files and programs
 ├── po/                     # Internationalization files
 └── pixmaps/                # Application icons
 ```
@@ -211,6 +225,36 @@ For DITA features, test with sample DITA files:
 - Task topics (.dita with `<task>` root)
 - Concept topics (.dita with `<concept>` root)
 - DITA maps (.ditamap)
+
+#### Testing Map View Functionality
+
+A comprehensive test map is included:
+
+```bash
+# Open the test map
+./src/xmlcopyeditor test_map_view.ditamap
+
+# Test the features:
+# 1. Click "Map View" toolbar button to see tree structure
+# 2. Expand/collapse topics to navigate hierarchy
+# 3. Double-click topics to open referenced files
+# 4. Drag topics and drop on other topics to reorganize
+# 5. Toggle back to Code View to see XML changes
+```
+
+Sample topics are provided in `sample_topics/` directory for testing file opening functionality.
+
+#### Backend Tests
+
+Compile and run the standalone map model test:
+
+```bash
+cd tests
+g++ -o test-map-simple test-map-simple.cpp \
+    ../src/ditamapmodel.cpp ../src/ditadetector.cpp \
+    $(pkg-config --cflags --libs libxml-2.0) -std=c++11
+./test-map-simple
+```
 
 ## Contributing
 
@@ -247,15 +291,24 @@ If wx-config is in a non-standard location:
 ./configure --with-wx-config=/path/to/wx-config
 ```
 
-### Missing WYSIWYG Preview button
+### Missing WYSIWYG Preview or Map View buttons
 
-The Preview button requires:
-- DITA document detected (topic or map)
-- Proper wxWidgets build with richtext support
+The view toggle buttons have specific requirements:
 
-Verify wxWidgets was compiled with:
+**Preview button** (for DITA topics):
+- Requires DITA topic detected (task, concept, reference, etc.)
+- Requires wxWidgets with richtext support
+- Not available for DITA maps
+
+**Map View button** (for DITA maps):
+- Requires DITA map detected (.ditamap file)
+- Uses wxTreeCtrl for display
+- Not available for DITA topics
+
+Verify wxWidgets was compiled with required components:
 ```bash
 wx-config --libs | grep richtext
+wx-config --libs | grep core
 ```
 
 ### Application can't find data files
