@@ -446,7 +446,11 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/txtstrm.h \
  /usr/include/wx-3.2/wx/position.h /usr/include/wx-3.2/wx/caret.h \
  /usr/include/wx-3.2/wx/generic/caret.h /usr/include/wx-3.2/wx/overlay.h \
- wraplibxml.h /usr/include/libxml2/libxml/xmlschemas.h \
+ ditamaptreectrl.h /usr/include/wx-3.2/wx/treectrl.h \
+ /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
+ /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h wraplibxml.h \
+ /usr/include/libxml2/libxml/xmlschemas.h \
  /usr/include/libxml2/libxml/xpath.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
  /usr/include/libxml2/libxml/catalog.h \
@@ -551,7 +555,6 @@ xmlcopyeditor.o: xmlcopyeditor.cpp /usr/include/stdc-predef.h \
  /usr/include/xercesc/framework/XMLGrammarDescription.hpp \
  xmlencodingspy.h styledialog.h /usr/include/wx-3.2/wx/listctrl.h \
  /usr/include/wx-3.2/wx/listbase.h /usr/include/wx-3.2/wx/itemattr.h \
- /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/listctrl.h housestyle.h \
  /usr/include/boost/shared_ptr.hpp \
  /usr/include/boost/smart_ptr/shared_ptr.hpp \
@@ -1426,6 +1429,12 @@ ditawysiwygctrl.h:
 /usr/include/wx-3.2/wx/caret.h:
 /usr/include/wx-3.2/wx/generic/caret.h:
 /usr/include/wx-3.2/wx/overlay.h:
+ditamaptreectrl.h:
+/usr/include/wx-3.2/wx/treectrl.h:
+/usr/include/wx-3.2/wx/treebase.h:
+/usr/include/wx-3.2/wx/itemid.h:
+/usr/include/wx-3.2/wx/systhemectrl.h:
+/usr/include/wx-3.2/wx/generic/treectlg.h:
 wraplibxml.h:
 /usr/include/libxml2/libxml/xmlschemas.h:
 /usr/include/libxml2/libxml/xpath.h:
@@ -1545,7 +1554,6 @@ styledialog.h:
 /usr/include/wx-3.2/wx/listctrl.h:
 /usr/include/wx-3.2/wx/listbase.h:
 /usr/include/wx-3.2/wx/itemattr.h:
-/usr/include/wx-3.2/wx/systhemectrl.h:
 /usr/include/wx-3.2/wx/generic/listctrl.h:
 housestyle.h:
 /usr/include/boost/shared_ptr.hpp:

@@ -162,6 +162,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_LOCATION_PANE_VISIBLE, MyFrame::OnLocationPaneVisible )
 	EVT_MENU ( ID_PROTECT_TAGS, MyFrame::OnProtectTags )
 	EVT_MENU ( ID_DITA_VIEW_TOGGLE, MyFrame::OnDitaViewToggle )
+	EVT_MENU ( ID_DITA_MAP_VIEW_TOGGLE, MyFrame::OnDitaMapViewToggle )
 	EVT_MENU ( ID_WRAP_WORDS, MyFrame::OnWrapWords )
 	EVT_MENU ( ID_COPY_XPATH, MyFrame::OnCopyXPath )
 	EVT_MENU_RANGE ( ID_SHOW_TAGS, ID_HIDE_TAGS, MyFrame::OnVisibilityState )
@@ -187,6 +188,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_ICONIZE ( MyFrame::OnIconize )
 	EVT_UPDATE_UI ( ID_LOCATION_PANE_VISIBLE, MyFrame::OnUpdateLocationPaneVisible )
 	EVT_UPDATE_UI ( ID_DITA_VIEW_TOGGLE, MyFrame::OnUpdateDitaViewToggle )
+	EVT_UPDATE_UI ( ID_DITA_MAP_VIEW_TOGGLE, MyFrame::OnUpdateDitaMapViewToggle )
 	EVT_UPDATE_UI ( wxID_CLOSE, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( wxID_SAVEAS, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( wxID_CLOSE_ALL, MyFrame::OnUpdateCloseAll )
@@ -4496,6 +4498,70 @@ void MyFrame::OnUpdateDitaViewToggle ( wxUpdateUIEvent& event )
 	}
 }
 
+void MyFrame::OnDitaMapViewToggle ( wxCommandEvent& event )
+{
+	// Get active document
+	XmlDoc *doc = getActiveDocument();
+	if ( !doc )
+		return;
+
+	// Check if this is a DITA document
+	DitaDoc *ditaDoc = dynamic_cast<DitaDoc*>( doc );
+	if ( !ditaDoc || !ditaDoc->isDitaDocument() )
+		return;
+
+	// Toggle view mode
+	DitaViewMode currentMode = ditaDoc->getViewMode();
+	if ( currentMode == DITA_VIEW_CODE )
+	{
+		ditaDoc->setViewMode( DITA_VIEW_MAP );
+	}
+	else
+	{
+		ditaDoc->setViewMode( DITA_VIEW_CODE );
+	}
+
+	// Update toolbar button state
+	if ( toolBar )
+	{
+		bool isMapView = ( ditaDoc->getViewMode() == DITA_VIEW_MAP );
+		toolBar->ToggleTool( ID_DITA_MAP_VIEW_TOGGLE, isMapView );
+	}
+
+	// Focus is set by the view switching logic
+}
+
+void MyFrame::OnUpdateDitaMapViewToggle ( wxUpdateUIEvent& event )
+{
+	// Enable button only if active document is a DITA Map
+	XmlDoc *doc = getActiveDocument();
+	if ( !doc )
+	{
+		event.Enable( false );
+		return;
+	}
+
+	DitaDoc *ditaDoc = dynamic_cast<DitaDoc*>( doc );
+	if ( !ditaDoc || !ditaDoc->isDitaDocument() )
+	{
+		event.Enable( false );
+		return;
+	}
+
+	// Only enable for DITA Maps (not topics)
+	event.Enable( ditaDoc->getDitaType() == DITA_TYPE_MAP );
+
+	// Check button if in Map view mode
+	if ( ditaDoc->getViewMode() == DITA_VIEW_MAP )
+	{
+		event.Check( true );
+	}
+	else
+	{
+		event.Check( false );
+	}
+}
+
 void MyFrame::OnVisibilityState ( wxCommandEvent& event )
 {
 
@@ -5622,6 +5688,15 @@ wxToolBar *MyFrame::getToolBar()
 	    wysiwygBitmap,
 	    wxNullBitmap,
 	    _ ( "Toggle DITA WYSIWYG Preview / Code View" ) );
+
+	// Map View toggle button
+	wxBitmap mapViewBitmap = wxArtProvider::GetBitmap ( wxART_LIST_VIEW, wxART_TOOLBAR );
+	toolBar->AddCheckTool (
+	    ID_DITA_MAP_VIEW_TOGGLE,
+	    _ ( "Map View" ),
+	    mapViewBitmap,
+	    wxNullBitmap,
+	    _ ( "Toggle DITA Map Tree View / Code View" ) );
 #endif
 
 	toolBar->Realize();

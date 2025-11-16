@@ -115,17 +115,18 @@ am_xmlcopyeditor_OBJECTS = aboutdialog.$(OBJEXT) \
 	casehandler.$(OBJEXT) catalogresolver.$(OBJEXT) \
 	commandpanel.$(OBJEXT) contexthandler.$(OBJEXT) \
 	ditadetector.$(OBJEXT) ditadoc.$(OBJEXT) \
-	ditamapmodel.$(OBJEXT) ditatopicmodel.$(OBJEXT) \
-	ditawysiwygctrl.$(OBJEXT) dtd2schema.$(OBJEXT) \
-	exportdialog.$(OBJEXT) findreplacepanel.$(OBJEXT) \
-	getword.$(OBJEXT) globalreplacedialog.$(OBJEXT) \
-	housestyle.$(OBJEXT) housestylereader.$(OBJEXT) \
-	housestylewriter.$(OBJEXT) insertpanel.$(OBJEXT) \
-	locationpanel.$(OBJEXT) mp3album.$(OBJEXT) \
-	myhtmlpane.$(OBJEXT) myipc.$(OBJEXT) mynotebook.$(OBJEXT) \
-	mypropertysheet.$(OBJEXT) nocasecompare.$(OBJEXT) \
-	pathresolver.$(OBJEXT) readfile.$(OBJEXT) replace.$(OBJEXT) \
-	rule.$(OBJEXT) styledialog.$(OBJEXT) threadreaper.$(OBJEXT) \
+	ditamapmodel.$(OBJEXT) ditamaptreectrl.$(OBJEXT) \
+	ditatopicmodel.$(OBJEXT) ditawysiwygctrl.$(OBJEXT) \
+	dtd2schema.$(OBJEXT) exportdialog.$(OBJEXT) \
+	findreplacepanel.$(OBJEXT) getword.$(OBJEXT) \
+	globalreplacedialog.$(OBJEXT) housestyle.$(OBJEXT) \
+	housestylereader.$(OBJEXT) housestylewriter.$(OBJEXT) \
+	insertpanel.$(OBJEXT) locationpanel.$(OBJEXT) \
+	mp3album.$(OBJEXT) myhtmlpane.$(OBJEXT) myipc.$(OBJEXT) \
+	mynotebook.$(OBJEXT) mypropertysheet.$(OBJEXT) \
+	nocasecompare.$(OBJEXT) pathresolver.$(OBJEXT) \
+	readfile.$(OBJEXT) replace.$(OBJEXT) rule.$(OBJEXT) \
+	styledialog.$(OBJEXT) threadreaper.$(OBJEXT) \
 	validationthread.$(OBJEXT) wrapaspell.$(OBJEXT) \
 	wrapdaisy.$(OBJEXT) wrapexpat.$(OBJEXT) wraplibxml.$(OBJEXT) \
 	wrapregex.$(OBJEXT) wraptempfilename.$(OBJEXT) \
@@ -171,11 +172,12 @@ am__depfiles_remade = ./$(DEPDIR)/aboutdialog.Po \
 	./$(DEPDIR)/casehandler.Po ./$(DEPDIR)/catalogresolver.Po \
 	./$(DEPDIR)/commandpanel.Po ./$(DEPDIR)/contexthandler.Po \
 	./$(DEPDIR)/ditadetector.Po ./$(DEPDIR)/ditadoc.Po \
-	./$(DEPDIR)/ditamapmodel.Po ./$(DEPDIR)/ditatopicmodel.Po \
-	./$(DEPDIR)/ditawysiwygctrl.Po ./$(DEPDIR)/dtd2schema.Po \
-	./$(DEPDIR)/exportdialog.Po ./$(DEPDIR)/findreplacepanel.Po \
-	./$(DEPDIR)/getword.Po ./$(DEPDIR)/globalreplacedialog.Po \
-	./$(DEPDIR)/housestyle.Po ./$(DEPDIR)/housestylereader.Po \
+	./$(DEPDIR)/ditamapmodel.Po ./$(DEPDIR)/ditamaptreectrl.Po \
+	./$(DEPDIR)/ditatopicmodel.Po ./$(DEPDIR)/ditawysiwygctrl.Po \
+	./$(DEPDIR)/dtd2schema.Po ./$(DEPDIR)/exportdialog.Po \
+	./$(DEPDIR)/findreplacepanel.Po ./$(DEPDIR)/getword.Po \
+	./$(DEPDIR)/globalreplacedialog.Po ./$(DEPDIR)/housestyle.Po \
+	./$(DEPDIR)/housestylereader.Po \
 	./$(DEPDIR)/housestylewriter.Po ./$(DEPDIR)/insertpanel.Po \
 	./$(DEPDIR)/locationpanel.Po ./$(DEPDIR)/mp3album.Po \
 	./$(DEPDIR)/myhtmlpane.Po ./$(DEPDIR)/myipc.Po \
@@ -452,6 +454,7 @@ xmlcopyeditor_SOURCES = aboutdialog.cpp \
 	ditadetector.cpp \
 	ditadoc.cpp \
 	ditamapmodel.cpp \
+	ditamaptreectrl.cpp \
 	ditatopicmodel.cpp \
 	ditawysiwygctrl.cpp \
 	dtd2schema.cpp \
@@ -666,6 +669,7 @@ include ./$(DEPDIR)/contexthandler.Po # am--include-marker
 include ./$(DEPDIR)/ditadetector.Po # am--include-marker
 include ./$(DEPDIR)/ditadoc.Po # am--include-marker
 include ./$(DEPDIR)/ditamapmodel.Po # am--include-marker
+include ./$(DEPDIR)/ditamaptreectrl.Po # am--include-marker
 include ./$(DEPDIR)/ditatopicmodel.Po # am--include-marker
 include ./$(DEPDIR)/ditawysiwygctrl.Po # am--include-marker
 include ./$(DEPDIR)/dtd2schema.Po # am--include-marker
@@ -937,6 +941,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/ditadetector.Po
 	-rm -f ./$(DEPDIR)/ditadoc.Po
 	-rm -f ./$(DEPDIR)/ditamapmodel.Po
+	-rm -f ./$(DEPDIR)/ditamaptreectrl.Po
 	-rm -f ./$(DEPDIR)/ditatopicmodel.Po
 	-rm -f ./$(DEPDIR)/ditawysiwygctrl.Po
 	-rm -f ./$(DEPDIR)/dtd2schema.Po
@@ -1049,6 +1054,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/ditadetector.Po
 	-rm -f ./$(DEPDIR)/ditadoc.Po
 	-rm -f ./$(DEPDIR)/ditamapmodel.Po
+	-rm -f ./$(DEPDIR)/ditamaptreectrl.Po
 	-rm -f ./$(DEPDIR)/ditatopicmodel.Po
 	-rm -f ./$(DEPDIR)/ditawysiwygctrl.Po
 	-rm -f ./$(DEPDIR)/dtd2schema.Po

@@ -1,6 +1,7 @@
-ditadoc.o: ditadoc.cpp /usr/include/stdc-predef.h ditadoc.h \
- /usr/include/wx-3.2/wx/wx.h /usr/include/wx-3.2/wx/defs.h \
- /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
+ditamaptreectrl.o: ditamaptreectrl.cpp /usr/include/stdc-predef.h \
+ ditamaptreectrl.h /usr/include/wx-3.2/wx/wx.h \
+ /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
+ /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib64/wx/include/gtk3-unicode-3.2/wx/setup.h \
  /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
  /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
@@ -337,7 +338,28 @@ ditadoc.o: ditadoc.cpp /usr/include/stdc-predef.h ditadoc.h \
  /usr/include/wx-3.2/wx/gtk/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h \
- /usr/include/boost/scoped_ptr.hpp \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/withimages.h /usr/include/wx-3.2/wx/imaglist.h \
+ /usr/include/wx-3.2/wx/generic/imaglist.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h /usr/include/c++/15/map \
+ /usr/include/c++/15/bits/stl_tree.h /usr/include/c++/15/bits/stl_map.h \
+ /usr/include/c++/15/bits/stl_multimap.h ditamapmodel.h \
+ /usr/include/libxml2/libxml/tree.h /usr/include/libxml2/libxml/parser.h \
+ /usr/include/libxml2/libxml/xmlversion.h \
+ /usr/include/libxml2/libxml/xmlexports.h \
+ /usr/include/libxml2/libxml/xmlstring.h \
+ /usr/include/libxml2/libxml/xmlmemory.h \
+ /usr/include/libxml2/libxml/xmlregexp.h \
+ /usr/include/libxml2/libxml/dict.h /usr/include/libxml2/libxml/hash.h \
+ /usr/include/libxml2/libxml/valid.h \
+ /usr/include/libxml2/libxml/xmlerror.h \
+ /usr/include/libxml2/libxml/list.h \
+ /usr/include/libxml2/libxml/xmlautomata.h \
+ /usr/include/libxml2/libxml/entities.h \
+ /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
+ /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX2.h \
+ /usr/include/libxml2/libxml/threads.h /usr/include/boost/scoped_ptr.hpp \
  /usr/include/boost/smart_ptr/scoped_ptr.hpp \
  /usr/include/boost/smart_ptr/detail/requires_cxx11.hpp \
  /usr/include/boost/config.hpp /usr/include/boost/config/user.hpp \
@@ -369,45 +391,9 @@ ditadoc.o: ditadoc.cpp /usr/include/stdc-predef.h ditadoc.h \
  /usr/include/c++/15/bits/atomic_lockfree_defines.h \
  /usr/include/c++/15/backward/auto_ptr.h \
  /usr/include/c++/15/pstl/glue_memory_defs.h \
- /usr/include/boost/smart_ptr/detail/operator_bool.hpp xmldoc.h \
- /usr/include/wx-3.2/wx/print.h /usr/include/wx-3.2/wx/generic/printps.h \
- /usr/include/wx-3.2/wx/prntbase.h /usr/include/wx-3.2/wx/cmndata.h \
- /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/convauto.h xmlctrl.h \
- /usr/include/wx-3.2/wx/stc/stc.h /usr/include/wx-3.2/wx/dnd.h \
- /usr/include/wx-3.2/wx/gtk/dnd.h /usr/include/c++/15/set \
- /usr/include/c++/15/bits/stl_tree.h /usr/include/c++/15/bits/stl_set.h \
- /usr/include/c++/15/bits/stl_multiset.h /usr/include/c++/15/map \
- /usr/include/c++/15/bits/stl_map.h \
- /usr/include/c++/15/bits/stl_multimap.h ditadetector.h ditatopicmodel.h \
- /usr/include/libxml2/libxml/tree.h /usr/include/libxml2/libxml/parser.h \
- /usr/include/libxml2/libxml/xmlversion.h \
- /usr/include/libxml2/libxml/xmlexports.h \
- /usr/include/libxml2/libxml/xmlstring.h \
- /usr/include/libxml2/libxml/xmlmemory.h \
- /usr/include/libxml2/libxml/xmlregexp.h \
- /usr/include/libxml2/libxml/dict.h /usr/include/libxml2/libxml/hash.h \
- /usr/include/libxml2/libxml/valid.h \
- /usr/include/libxml2/libxml/xmlerror.h \
- /usr/include/libxml2/libxml/list.h \
- /usr/include/libxml2/libxml/xmlautomata.h \
- /usr/include/libxml2/libxml/entities.h \
- /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
- /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/libxml2/libxml/threads.h ditamapmodel.h ditawysiwygctrl.h \
- /usr/include/wx-3.2/wx/richtext/richtextctrl.h \
- /usr/include/wx-3.2/wx/richtext/richtextbuffer.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/txtstrm.h \
- /usr/include/wx-3.2/wx/position.h /usr/include/wx-3.2/wx/caret.h \
- /usr/include/wx-3.2/wx/generic/caret.h /usr/include/wx-3.2/wx/overlay.h \
- ditamaptreectrl.h /usr/include/wx-3.2/wx/treectrl.h \
- /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
- /usr/include/wx-3.2/wx/systhemectrl.h \
- /usr/include/wx-3.2/wx/withimages.h /usr/include/wx-3.2/wx/imaglist.h \
- /usr/include/wx-3.2/wx/generic/imaglist.h \
- /usr/include/wx-3.2/wx/generic/treectlg.h
+ /usr/include/boost/smart_ptr/detail/operator_bool.hpp
 /usr/include/stdc-predef.h:
-ditadoc.h:
+ditamaptreectrl.h:
 /usr/include/wx-3.2/wx/wx.h:
 /usr/include/wx-3.2/wx/defs.h:
 /usr/include/wx-3.2/wx/platform.h:
@@ -951,6 +937,38 @@ ditadoc.h:
 /usr/include/wx-3.2/wx/filectrl.h:
 /usr/include/wx-3.2/wx/mdi.h:
 /usr/include/wx-3.2/wx/gtk/mdi.h:
+/usr/include/wx-3.2/wx/treectrl.h:
+/usr/include/wx-3.2/wx/treebase.h:
+/usr/include/wx-3.2/wx/itemid.h:
+/usr/include/wx-3.2/wx/systhemectrl.h:
+/usr/include/wx-3.2/wx/withimages.h:
+/usr/include/wx-3.2/wx/imaglist.h:
+/usr/include/wx-3.2/wx/generic/imaglist.h:
+/usr/include/wx-3.2/wx/generic/treectlg.h:
+/usr/include/c++/15/map:
+/usr/include/c++/15/bits/stl_tree.h:
+/usr/include/c++/15/bits/stl_map.h:
+/usr/include/c++/15/bits/stl_multimap.h:
+ditamapmodel.h:
+/usr/include/libxml2/libxml/tree.h:
+/usr/include/libxml2/libxml/parser.h:
+/usr/include/libxml2/libxml/xmlversion.h:
+/usr/include/libxml2/libxml/xmlexports.h:
+/usr/include/libxml2/libxml/xmlstring.h:
+/usr/include/libxml2/libxml/xmlmemory.h:
+/usr/include/libxml2/libxml/xmlregexp.h:
+/usr/include/libxml2/libxml/dict.h:
+/usr/include/libxml2/libxml/hash.h:
+/usr/include/libxml2/libxml/valid.h:
+/usr/include/libxml2/libxml/xmlerror.h:
+/usr/include/libxml2/libxml/list.h:
+/usr/include/libxml2/libxml/xmlautomata.h:
+/usr/include/libxml2/libxml/entities.h:
+/usr/include/libxml2/libxml/encoding.h:
+/usr/include/iconv.h:
+/usr/include/libxml2/libxml/xmlIO.h:
+/usr/include/libxml2/libxml/SAX2.h:
+/usr/include/libxml2/libxml/threads.h:
 /usr/include/boost/scoped_ptr.hpp:
 /usr/include/boost/smart_ptr/scoped_ptr.hpp:
 /usr/include/boost/smart_ptr/detail/requires_cxx11.hpp:
@@ -988,62 +1006,3 @@ ditadoc.h:
 /usr/include/c++/15/backward/auto_ptr.h:
 /usr/include/c++/15/pstl/glue_memory_defs.h:
 /usr/include/boost/smart_ptr/detail/operator_bool.hpp:
-xmldoc.h:
-/usr/include/wx-3.2/wx/print.h:
-/usr/include/wx-3.2/wx/generic/printps.h:
-/usr/include/wx-3.2/wx/prntbase.h:
-/usr/include/wx-3.2/wx/cmndata.h:
-/usr/include/wx-3.2/wx/filename.h:
-/usr/include/wx-3.2/wx/file.h:
-/usr/include/wx-3.2/wx/convauto.h:
-xmlctrl.h:
-/usr/include/wx-3.2/wx/stc/stc.h:
-/usr/include/wx-3.2/wx/dnd.h:
-/usr/include/wx-3.2/wx/gtk/dnd.h:
-/usr/include/c++/15/set:
-/usr/include/c++/15/bits/stl_tree.h:
-/usr/include/c++/15/bits/stl_set.h:
-/usr/include/c++/15/bits/stl_multiset.h:
-/usr/include/c++/15/map:
-/usr/include/c++/15/bits/stl_map.h:
-/usr/include/c++/15/bits/stl_multimap.h:
-ditadetector.h:
-ditatopicmodel.h:
-/usr/include/libxml2/libxml/tree.h:
-/usr/include/libxml2/libxml/parser.h:
-/usr/include/libxml2/libxml/xmlversion.h:
-/usr/include/libxml2/libxml/xmlexports.h:
-/usr/include/libxml2/libxml/xmlstring.h:
-/usr/include/libxml2/libxml/xmlmemory.h:
-/usr/include/libxml2/libxml/xmlregexp.h:
-/usr/include/libxml2/libxml/dict.h:
-/usr/include/libxml2/libxml/hash.h:
-/usr/include/libxml2/libxml/valid.h:
-/usr/include/libxml2/libxml/xmlerror.h:
-/usr/include/libxml2/libxml/list.h:
-/usr/include/libxml2/libxml/xmlautomata.h:
-/usr/include/libxml2/libxml/entities.h:
-/usr/include/libxml2/libxml/encoding.h:
-/usr/include/iconv.h:
-/usr/include/libxml2/libxml/xmlIO.h:
-/usr/include/libxml2/libxml/SAX2.h:
-/usr/include/libxml2/libxml/threads.h:
-ditamapmodel.h:
-ditawysiwygctrl.h:
-/usr/include/wx-3.2/wx/richtext/richtextctrl.h:
-/usr/include/wx-3.2/wx/richtext/richtextbuffer.h:
-/usr/include/wx-3.2/wx/cmdproc.h:
-/usr/include/wx-3.2/wx/txtstrm.h:
-/usr/include/wx-3.2/wx/position.h:
-/usr/include/wx-3.2/wx/caret.h:
-/usr/include/wx-3.2/wx/generic/caret.h:
-/usr/include/wx-3.2/wx/overlay.h:
-ditamaptreectrl.h:
-/usr/include/wx-3.2/wx/treectrl.h:
-/usr/include/wx-3.2/wx/treebase.h:
-/usr/include/wx-3.2/wx/itemid.h:
-/usr/include/wx-3.2/wx/systhemectrl.h:
-/usr/include/wx-3.2/wx/withimages.h:
-/usr/include/wx-3.2/wx/imaglist.h:
-/usr/include/wx-3.2/wx/generic/imaglist.h:
-/usr/include/wx-3.2/wx/generic/treectlg.h:

@@ -23,6 +23,7 @@ xmlcopyeditor_SOURCES = aboutdialog.cpp \
 	ditadetector.cpp \
 	ditadoc.cpp \
 	ditamapmodel.cpp \
+	ditamaptreectrl.cpp \
 	ditatopicmodel.cpp \
 	ditawysiwygctrl.cpp \
 	dtd2schema.cpp \

@@ -185,8 +185,66 @@ bool DitaMapModel::removeTopicRef ( const std::string &id )
 
 bool DitaMapModel::moveTopicRef ( const std::string &id, const std::string &newParentId, int position )
 {
-	// TODO: Phase 4 - TASK-025
-	return false;
+	if ( !doc || !mapNode )
+		return false;
+
+	// Find the node to move
+	xmlNodePtr nodeToMove = findTopicRefNode ( id );
+	if ( !nodeToMove )
+		return false;
+
+	// Find target parent node
+	xmlNodePtr targetParent;
+	if ( newParentId.empty() )
+	{
+		// Moving to root level
+		targetParent = mapNode;
+	}
+	else
+	{
+		targetParent = findTopicRefNode ( newParentId );
+		if ( !targetParent )
+			return false;
+	}
+
+	// Check if this would create a cycle
+	if ( wouldCreateCycle ( nodeToMove, targetParent ) )
+		return false;
+
+	// Unlink from current parent
+	xmlUnlinkNode ( nodeToMove );
+
+	// Find insertion point
+	xmlNodePtr insertBefore = NULL;
+	int currentPos = 0;
+
+	for ( xmlNodePtr child = targetParent->children; child; child = child->next )
+	{
+		if ( child->type == XML_ELEMENT_NODE &&
+		     xmlStrcmp ( child->name, BAD_CAST "topicref" ) == 0 )
+		{
+			if ( currentPos == position )
+			{
+				insertBefore = child;
+				break;
+			}
+			currentPos++;
+		}
+	}
+
+	// Insert at the appropriate position
+	if ( insertBefore )
+	{
+		// Insert before the found node
+		xmlAddPrevSibling ( insertBefore, nodeToMove );
+	}
+	else
+	{
+		// Append to end of parent
+		xmlAddChild ( targetParent, nodeToMove );
+	}
+
+	return true;
 }
 
 bool DitaMapModel::updateTopicRef ( const std::string &id, const TopicRef &updatedRef )
@@ -197,8 +255,33 @@ bool DitaMapModel::updateTopicRef ( const std::string &id, const TopicRef &updat
 
 bool DitaMapModel::canMoveTopicRef ( const std::string &id, const std::string &targetParentId )
 {
-	// TODO: Phase 4 - Validation
-	return false;
+	if ( !doc || !mapNode )
+		return false;
+
+	// Find the node to move
+	xmlNodePtr nodeToMove = findTopicRefNode ( id );
+	if ( !nodeToMove )
+		return false;
+
+	// Find target parent node
+	xmlNodePtr targetParent;
+	if ( targetParentId.empty() )
+	{
+		// Moving to root level is always valid
+		targetParent = mapNode;
+	}
+	else
+	{
+		targetParent = findTopicRefNode ( targetParentId );
+		if ( !targetParent )
+			return false;
+	}
+
+	// Check if this would create a cycle
+	if ( wouldCreateCycle ( nodeToMove, targetParent ) )
+		return false;
+
+	return true;
 }
 
 // Private helper methods
@@ -318,6 +401,22 @@ xmlNodePtr DitaMapModel::findTopicRefNode ( const std::string &id )
 
 bool DitaMapModel::wouldCreateCycle ( xmlNodePtr nodeToMove, xmlNodePtr targetParent )
 {
-	// TODO: Phase 4 - Cycle detection
+	if ( !nodeToMove || !targetParent )
+		return false;
+
+	// Can't move a node to itself
+	if ( nodeToMove == targetParent )
+		return true;
+
+	// Check if targetParent is a descendant of nodeToMove
+	// (this would create a cycle)
+	xmlNodePtr ancestor = targetParent;
+	while ( ancestor )
+	{
+		if ( ancestor == nodeToMove )
+			return true; // Would create cycle
+		ancestor = ancestor->parent;
+	}
+
 	return false;
 }

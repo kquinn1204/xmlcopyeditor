@@ -53,7 +53,8 @@ DitaDoc::DitaDoc(
 	),
 	mDitaType(DITA_TYPE_NONE),
 	mViewMode(DITA_VIEW_CODE),
-	mWysiwygCtrl(NULL)
+	mWysiwygCtrl(NULL),
+	mMapTreeCtrl(NULL)
 {
 	// Auto-detect DITA type from content if buffer provided
 	if (buffer && bufferLen > 0)
@@ -69,6 +70,12 @@ DitaDoc::~DitaDoc()
 	{
 		mWysiwygCtrl->Destroy();
 		mWysiwygCtrl = NULL;
+	}
+	// Delete Map tree control if created
+	if (mMapTreeCtrl)
+	{
+		mMapTreeCtrl->Destroy();
+		mMapTreeCtrl = NULL;
 	}
 	// boost::scoped_ptr will automatically clean up models
 }
@@ -113,10 +120,18 @@ void DitaDoc::setViewMode(DitaViewMode mode)
 	if (mode == DITA_VIEW_WYSIWYG && mDitaType != DITA_TYPE_TOPIC)
 		return;
 
+	// Only support Map view for maps
+	if (mode == DITA_VIEW_MAP && mDitaType != DITA_TYPE_MAP)
+		return;
+
 	// Perform the switch
 	if (mode == DITA_VIEW_WYSIWYG)
 	{
 		switchToWysiwygView();
+	}
+	else if (mode == DITA_VIEW_MAP)
+	{
+		switchToMapView();
 	}
 	else if (mode == DITA_VIEW_CODE)
 	{
@@ -128,21 +143,44 @@ void DitaDoc::setViewMode(DitaViewMode mode)
 
 void DitaDoc::switchToCodeView()
 {
-	if (!mWysiwygCtrl || !mTopicModel)
-		return;
+	// Handle switching from WYSIWYG view
+	if (mWysiwygCtrl && mWysiwygCtrl->IsShown())
+	{
+		if (!mTopicModel)
+			return;
 
-	// NOTE: Skipping syncWysiwygToModel() for now because buildXmlFromContent()
-	// creates a simplified topic structure and loses task-specific elements
-	// (steps, substeps, codeblocks, etc.). WYSIWYG view is currently read-only.
-	// TODO: Implement proper two-way sync that preserves all DITA elements
+		// NOTE: Skipping syncWysiwygToModel() for now because buildXmlFromContent()
+		// creates a simplified topic structure and loses task-specific elements
+		// (steps, substeps, codeblocks, etc.). WYSIWYG view is currently read-only.
+		// TODO: Implement proper two-way sync that preserves all DITA elements
 
-	// Render model to code (original content preserved)
-	renderModelToCode();
+		// Render model to code (original content preserved)
+		renderModelToCode();
 
-	// Hide WYSIWYG, show code view
-	mWysiwygCtrl->Hide();
-	this->Show();
-	this->SetFocus();
+		// Hide WYSIWYG, show code view
+		mWysiwygCtrl->Hide();
+		this->Show();
+		this->SetFocus();
+	}
+	// Handle switching from Map tree view
+	else if (mMapTreeCtrl && mMapTreeCtrl->IsShown())
+	{
+		if (!mMapModel)
+			return;
+
+		// Sync any changes from map tree to model
+		syncMapTreeToModel();
+
+		// Serialize model to code
+		std::string xml = mMapModel->serializeToXml();
+		wxString wxXml = wxString::FromUTF8(xml.c_str());
+		SetText(wxXml);
+
+		// Hide map tree, show code view
+		mMapTreeCtrl->Hide();
+		this->Show();
+		this->SetFocus();
+	}
 }
 
 void DitaDoc::switchToWysiwygView()
@@ -276,4 +314,59 @@ void DitaDoc::renderModelToWysiwyg()
 
 	// Render model in WYSIWYG view
 	mWysiwygCtrl->renderFromModel();
+}
+
+void DitaDoc::switchToMapView()
+{
+	if (!mMapModel)
+		return;
+
+	// Create map tree control if not yet created
+	if (!mMapTreeCtrl)
+	{
+		// Get parent window (should be the notebook)
+		wxWindow *parent = GetParent();
+		if (!parent)
+			return;
+
+		// Create map tree control with same parent
+		mMapTreeCtrl = new DitaMapTreeCtrl(
+			parent,
+			wxID_ANY,
+			mMapModel.get()
+		);
+
+		// Position it to overlap this control
+		mMapTreeCtrl->SetPosition(GetPosition());
+		mMapTreeCtrl->SetSize(GetSize());
+	}
+
+	// Sync code to model
+	wxString wxContent = GetText();
+	std::string content(wxContent.mb_str(wxConvUTF8));
+	mMapModel->loadFromXml(content);
+
+	// Render model to map tree
+	renderModelToMapTree();
+
+	// Hide code view, show map tree
+	this->Hide();
+	mMapTreeCtrl->Show();
+	mMapTreeCtrl->SetFocus();
+}
+
+void DitaDoc::syncMapTreeToModel()
+{
+	// Map tree directly modifies the model via drag-and-drop
+	// No additional sync needed - model is already up to date
+	// The DitaMapTreeCtrl calls moveTopicRef on the model directly
+}
+
+void DitaDoc::renderModelToMapTree()
+{
+	if (!mMapTreeCtrl || !mMapModel)
+		return;
+
+	// Build tree from model
+	mMapTreeCtrl->buildTreeFromModel();
 }

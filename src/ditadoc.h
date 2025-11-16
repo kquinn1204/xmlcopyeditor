@@ -29,6 +29,7 @@
 #include "ditatopicmodel.h"
 #include "ditamapmodel.h"
 #include "ditawysiwygctrl.h"
+#include "ditamaptreectrl.h"
 
 /**
  * View modes for DITA documents
@@ -161,6 +162,11 @@ public:
 	void switchToWysiwygView();
 
 	/**
+	 * Switch to Map tree view
+	 */
+	void switchToMapView();
+
+	/**
 	 * Initialize DITA models from current document content
 	 * Called after document is loaded or content changes
 	 *
@@ -187,6 +193,11 @@ protected:
 	void syncWysiwygToModel();
 
 	/**
+	 * Sync Map tree view content to model
+	 */
+	void syncMapTreeToModel();
+
+	/**
 	 * Render model to code view
 	 */
 	void renderModelToCode();
@@ -196,12 +207,18 @@ protected:
 	 */
 	void renderModelToWysiwyg();
 
+	/**
+	 * Render model to Map tree view
+	 */
+	void renderModelToMapTree();
+
 private:
 	DitaFileType mDitaType;                        // Detected DITA file type
 	DitaViewMode mViewMode;                        // Current view mode
 	boost::scoped_ptr<DitaTopicModel> mTopicModel; // Topic model (if applicable)
 	boost::scoped_ptr<DitaMapModel> mMapModel;     // Map model (if applicable)
 	DitaWysiwygCtrl *mWysiwygCtrl;                 // WYSIWYG control (created on demand)
+	DitaMapTreeCtrl *mMapTreeCtrl;                 // Map tree control (created on demand)
 };
 
 #endif // DITA_DOC_H
