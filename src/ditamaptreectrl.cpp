@@ -146,16 +146,13 @@ void DitaMapTreeCtrl::buildTreeRecursive(const wxTreeItemId& parentItem, const s
 	{
 		const TopicRef& ref = children[i];
 
-		// Skip if this is a child of another topicref (avoid duplicates)
-		if (!parentRefId.empty() || ref.id.find("topicref_") == 0)
-		{
-			wxTreeItemId childItem = addTopicRefToTree(parentItem, ref);
+		// Add this topicref to the tree
+		wxTreeItemId childItem = addTopicRefToTree(parentItem, ref);
 
-			// Recursively add children
-			if (childItem.IsOk() && !ref.childIds.empty())
-			{
-				buildTreeRecursive(childItem, ref.id);
-			}
+		// Recursively add children
+		if (childItem.IsOk() && !ref.childIds.empty())
+		{
+			buildTreeRecursive(childItem, ref.id);
 		}
 	}
 }
