@@ -391,7 +391,9 @@ ditamaptreectrl.o: ditamaptreectrl.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/15/bits/atomic_lockfree_defines.h \
  /usr/include/c++/15/backward/auto_ptr.h \
  /usr/include/c++/15/pstl/glue_memory_defs.h \
- /usr/include/boost/smart_ptr/detail/operator_bool.hpp
+ /usr/include/boost/smart_ptr/detail/operator_bool.hpp \
+ /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
+ /usr/include/wx-3.2/wx/convauto.h
 /usr/include/stdc-predef.h:
 ditamaptreectrl.h:
 /usr/include/wx-3.2/wx/wx.h:
@@ -1006,3 +1008,6 @@ ditamapmodel.h:
 /usr/include/c++/15/backward/auto_ptr.h:
 /usr/include/c++/15/pstl/glue_memory_defs.h:
 /usr/include/boost/smart_ptr/detail/operator_bool.hpp:
+/usr/include/wx-3.2/wx/filename.h:
+/usr/include/wx-3.2/wx/file.h:
+/usr/include/wx-3.2/wx/convauto.h:

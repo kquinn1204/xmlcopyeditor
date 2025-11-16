@@ -21,6 +21,7 @@
 
 #include "ditamaptreectrl.h"
 #include <wx/msgdlg.h>
+#include <wx/filename.h>
 
 BEGIN_EVENT_TABLE(DitaMapTreeCtrl, wxTreeCtrl)
 	EVT_TREE_BEGIN_DRAG(wxID_ANY, DitaMapTreeCtrl::OnBeginDrag)
@@ -32,11 +33,13 @@ END_EVENT_TABLE()
 DitaMapTreeCtrl::DitaMapTreeCtrl(
 	wxWindow* parent,
 	wxWindowID id,
-	DitaMapModel* model
+	DitaMapModel* model,
+	const wxString& mapFilePath
 )
 	: wxTreeCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
 		wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT | wxTR_EDIT_LABELS)
 	, m_model(model)
+	, m_mapFilePath(mapFilePath)
 	, m_isDragging(false)
 {
 	// Initialize tree with root item if model is provided
@@ -348,14 +351,47 @@ void DitaMapTreeCtrl::OnItemActivated(wxTreeEvent& event)
 
 	TopicRef ref = m_model->getTopicRefById(refId);
 
-	// TODO: Open referenced topic in editor
-	// This could be implemented to open the href'd file
+	// Open referenced topic in editor
 	if (!ref.href.empty())
 	{
-		wxMessageBox(
-			wxT("Would open: ") + wxString::FromUTF8(ref.href.c_str()),
-			wxT("Topic Activation"),
-			wxOK | wxICON_INFORMATION
-		);
+		// Convert href to wxString
+		wxString href = wxString::FromUTF8(ref.href.c_str());
+
+		// Resolve relative path against map file location
+		wxFileName topicPath(href);
+		if (!topicPath.IsAbsolute() && !m_mapFilePath.IsEmpty())
+		{
+			// Get directory of map file
+			wxFileName mapFile(m_mapFilePath);
+			wxString mapDir = mapFile.GetPath();
+
+			// Make the href path absolute
+			topicPath.MakeAbsolute(mapDir);
+		}
+
+		// Get the full path
+		wxString fullPath = topicPath.GetFullPath();
+
+		// Check if file exists
+		if (!wxFileExists(fullPath))
+		{
+			wxMessageBox(
+				wxT("Topic file not found:\n") + fullPath,
+				wxT("File Not Found"),
+				wxOK | wxICON_WARNING
+			);
+			return;
+		}
+
+		// Create a command event to open the file
+		// We'll send this to the top-level parent (main frame)
+		wxWindow* topFrame = wxGetTopLevelParent(this);
+		if (topFrame)
+		{
+			// Create a custom event or use wxID_OPEN
+			wxCommandEvent openEvent(wxEVT_COMMAND_MENU_SELECTED, wxID_OPEN);
+			openEvent.SetString(fullPath);
+			topFrame->GetEventHandler()->AddPendingEvent(openEvent);
+		}
 	}
 }

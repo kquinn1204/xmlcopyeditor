@@ -57,11 +57,13 @@ public:
 	 * @param parent parent window
 	 * @param id window ID
 	 * @param model pointer to DitaMapModel
+	 * @param mapFilePath full path to the map file (for resolving relative hrefs)
 	 */
 	DitaMapTreeCtrl(
 		wxWindow* parent,
 		wxWindowID id,
-		DitaMapModel* model
+		DitaMapModel* model,
+		const wxString& mapFilePath = wxEmptyString
 	);
 
 	/**
@@ -103,6 +105,9 @@ public:
 private:
 	// Model reference
 	DitaMapModel* m_model;
+
+	// Map file path (for resolving relative hrefs)
+	wxString m_mapFilePath;
 
 	// Root tree item
 	wxTreeItemId m_rootItem;

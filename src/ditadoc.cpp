@@ -330,10 +330,13 @@ void DitaDoc::switchToMapView()
 			return;
 
 		// Create map tree control with same parent
+		// Pass the map file path so it can resolve relative hrefs
+		wxString mapFilePath = getFullFileName();
 		mMapTreeCtrl = new DitaMapTreeCtrl(
 			parent,
 			wxID_ANY,
-			mMapModel.get()
+			mMapModel.get(),
+			mapFilePath
 		);
 
 		// Position it to overlap this control
